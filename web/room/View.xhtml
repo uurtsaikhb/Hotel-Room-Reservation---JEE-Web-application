@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewRoomTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewRoomLabel_id}"/>
+                    <h:outputText value="#{roomController.selected.id}" title="#{bundle.ViewRoomTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewRoomLabel_hotel}"/>
+                    <h:outputText value="#{roomController.selected.hotel}" title="#{bundle.ViewRoomTitle_hotel}"/>
+                    <h:outputText value="#{bundle.ViewRoomLabel_type}"/>
+                    <h:outputText value="#{roomController.selected.type}" title="#{bundle.ViewRoomTitle_type}"/>
+                    <h:outputText value="#{bundle.ViewRoomLabel_smoking}"/>
+                    <h:outputText value="#{roomController.selected.smoking}" title="#{bundle.ViewRoomTitle_smoking}"/>
+                    <h:outputText value="#{bundle.ViewRoomLabel_price}"/>
+                    <h:outputText value="#{roomController.selected.price}" title="#{bundle.ViewRoomTitle_price}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{roomController.destroyAndView}" value="#{bundle.ViewRoomDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewRoomEditLink}"/>
+                <br />
+                <h:commandLink action="#{roomController.prepareCreate}" value="#{bundle.ViewRoomCreateLink}" />
+                <br />
+                <h:commandLink action="#{roomController.prepareList}" value="#{bundle.ViewRoomShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewRoomIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

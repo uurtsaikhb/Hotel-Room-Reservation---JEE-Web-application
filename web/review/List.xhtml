@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListReviewTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListReviewEmpty}" rendered="#{reviewController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{reviewController.items.rowCount > 0}">
+                    <h:outputText value="#{reviewController.pagination.pageFirstItem + 1}..#{reviewController.pagination.pageLastItem + 1}/#{reviewController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{reviewController.previous}" value="#{bundle.Previous} #{reviewController.pagination.pageSize}" rendered="#{reviewController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{reviewController.next}" value="#{bundle.Next} #{reviewController.pagination.pageSize}" rendered="#{reviewController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{reviewController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReviewTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReviewTitle_hotel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hotel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReviewTitle_account}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.account}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReviewTitle_rank}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rank}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{reviewController.prepareView}" value="#{bundle.ListReviewViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{reviewController.prepareEdit}" value="#{bundle.ListReviewEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{reviewController.destroy}" value="#{bundle.ListReviewDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{reviewController.prepareCreate}" value="#{bundle.ListReviewCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListReviewIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

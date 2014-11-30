@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListFeatureRoomTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListFeatureRoomEmpty}" rendered="#{featureRoomController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{featureRoomController.items.rowCount > 0}">
+                    <h:outputText value="#{featureRoomController.pagination.pageFirstItem + 1}..#{featureRoomController.pagination.pageLastItem + 1}/#{featureRoomController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{featureRoomController.previous}" value="#{bundle.Previous} #{featureRoomController.pagination.pageSize}" rendered="#{featureRoomController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{featureRoomController.next}" value="#{bundle.Next} #{featureRoomController.pagination.pageSize}" rendered="#{featureRoomController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{featureRoomController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureRoomTitle_feature_type}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.feature_type}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureRoomTitle_discription}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.discription}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureRoomTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{featureRoomController.prepareView}" value="#{bundle.ListFeatureRoomViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{featureRoomController.prepareEdit}" value="#{bundle.ListFeatureRoomEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{featureRoomController.destroy}" value="#{bundle.ListFeatureRoomDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{featureRoomController.prepareCreate}" value="#{bundle.ListFeatureRoomCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListFeatureRoomIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

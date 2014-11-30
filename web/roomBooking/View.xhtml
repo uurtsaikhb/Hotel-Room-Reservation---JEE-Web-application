@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewRoomBookingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewRoomBookingLabel_id}"/>
+                    <h:outputText value="#{roomBookingController.selected.id}" title="#{bundle.ViewRoomBookingTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewRoomBookingLabel_dateFrom}"/>
+                    <h:outputText value="#{roomBookingController.selected.dateFrom}" title="#{bundle.ViewRoomBookingTitle_dateFrom}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewRoomBookingLabel_dateTo}"/>
+                    <h:outputText value="#{roomBookingController.selected.dateTo}" title="#{bundle.ViewRoomBookingTitle_dateTo}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewRoomBookingLabel_room}"/>
+                    <h:outputText value="#{roomBookingController.selected.room}" title="#{bundle.ViewRoomBookingTitle_room}"/>
+                    <h:outputText value="#{bundle.ViewRoomBookingLabel_no_of_people}"/>
+                    <h:outputText value="#{roomBookingController.selected.no_of_people}" title="#{bundle.ViewRoomBookingTitle_no_of_people}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{roomBookingController.destroyAndView}" value="#{bundle.ViewRoomBookingDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewRoomBookingEditLink}"/>
+                <br />
+                <h:commandLink action="#{roomBookingController.prepareCreate}" value="#{bundle.ViewRoomBookingCreateLink}" />
+                <br />
+                <h:commandLink action="#{roomBookingController.prepareList}" value="#{bundle.ViewRoomBookingShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewRoomBookingIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

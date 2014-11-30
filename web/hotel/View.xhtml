@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewHotelTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewHotelLabel_id}"/>
+                    <h:outputText value="#{hotelController.selected.id}" title="#{bundle.ViewHotelTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewHotelLabel_name}"/>
+                    <h:outputText value="#{hotelController.selected.name}" title="#{bundle.ViewHotelTitle_name}"/>
+                    <h:outputText value="Street" />
+                    <h:outputText id="street" value="#{hotelController.address.street}" title="Street" />
+                    <h:outputText value="City" />
+                    <h:outputText id="city" value="#{hotelController.address.city}" title="City" />
+                    <h:outputText value="State" />
+                    <h:outputText id="state" value="#{hotelController.address.province}" title="State" />
+                    <h:outputText value="Zip Code"  />
+                    <h:outputText id="zipCode" value="#{hotelController.address.zipCode}" title="Zip Code" />
+                    <h:outputText value="Phone"  />
+                    <h:outputText id="phone" value="#{hotelController.address.phone}" title="Phone" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{hotelController.destroyAndView}" value="#{bundle.ViewHotelDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewHotelEditLink}"/>
+                <br />
+                <h:commandLink action="#{hotelController.prepareCreate}" value="#{bundle.ViewHotelCreateLink}" />
+                <br />
+                <h:commandLink action="#{hotelController.prepareList}" value="#{bundle.ViewHotelShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewHotelIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

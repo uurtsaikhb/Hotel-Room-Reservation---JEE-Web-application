@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateHotelTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateHotelLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{hotelController.selected.id}" title="#{bundle.CreateHotelTitle_id}" />
+                    <h:outputLabel value="#{bundle.CreateHotelLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{hotelController.selected.name}" title="#{bundle.CreateHotelTitle_name}" />
+                    <h:outputLabel value="Street" for="street" />
+                    <h:inputText id="street" value="#{hotelController.address.street}" title="Street" />
+                    <h:outputLabel value="City" for="city" />
+                    <h:inputText id="city" value="#{hotelController.address.city}" title="City" />
+                    <h:outputLabel value="State" for="state" />
+                    <h:inputText id="state" value="#{hotelController.address.province}" title="State" />
+                    <h:outputLabel value="Zip Code" for="zipCode" />
+                    <h:inputText id="zipCode" value="#{hotelController.address.zipCode}" title="Zip Code" />
+                    <h:outputLabel value="Phone" for="phone" />
+                    <h:inputText id="phone" value="#{hotelController.address.phone}" title="Phone" />
+                    
+                
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{hotelController.create}" value="#{bundle.CreateHotelSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{hotelController.prepareList}" value="#{bundle.CreateHotelShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateHotelIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

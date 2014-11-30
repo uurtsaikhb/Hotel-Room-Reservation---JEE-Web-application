@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRoomBookingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{roomBookingController.selected.id}" title="#{bundle.CreateRoomBookingTitle_id}" />
+                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateFrom}" for="dateFrom" />
+                    <h:inputText id="dateFrom" value="#{roomBookingController.selected.dateFrom}" title="#{bundle.CreateRoomBookingTitle_dateFrom}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateTo}" for="dateTo" />
+                    <h:inputText id="dateTo" value="#{roomBookingController.selected.dateTo}" title="#{bundle.CreateRoomBookingTitle_dateTo}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_room}" for="room" />
+                    <h:selectOneMenu id="room" value="#{roomBookingController.selected.room}" title="#{bundle.CreateRoomBookingTitle_room}" >
+                        <f:selectItems value="#{roomController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_no_of_people}" for="no_of_people" />
+                    <h:inputText id="no_of_people" value="#{roomBookingController.selected.no_of_people}" title="#{bundle.CreateRoomBookingTitle_no_of_people}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{roomBookingController.create}" value="#{bundle.CreateRoomBookingSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{roomBookingController.prepareList}" value="#{bundle.CreateRoomBookingShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateRoomBookingIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

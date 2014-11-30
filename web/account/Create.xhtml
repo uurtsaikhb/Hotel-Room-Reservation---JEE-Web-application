@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAccountTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{accountController.selected.id}" title="#{bundle.CreateAccountTitle_id}" />
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_fname}" for="fname" />
+                    <h:inputText id="fname" value="#{accountController.selected.fname}" title="#{bundle.CreateAccountTitle_fname}" />
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_lname}" for="lname" />
+                    <h:inputText id="lname" value="#{accountController.selected.lname}" title="#{bundle.CreateAccountTitle_lname}" />
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{accountController.selected.email}" title="#{bundle.CreateAccountTitle_email}" />
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_password}" for="password" />
+                    <h:inputText id="password" value="#{accountController.selected.password}" title="#{bundle.CreateAccountTitle_password}" />
+                    <h:outputLabel value="Street" for="street" />
+                    <h:inputText id="street" value="#{accountController.address.street}" title="Street" />
+                    <h:outputLabel value="City" for="city" />
+                    <h:inputText id="city" value="#{accountController.address.city}" title="City" />
+                    <h:outputLabel value="State" for="state" />
+                    <h:inputText id="state" value="#{accountController.address.province}" title="State" />
+                    <h:outputLabel value="Zip Code" for="zipCode" />
+                    <h:inputText id="zipCode" value="#{accountController.address.zipCode}" title="Zip Code" />
+                    <h:outputLabel value="Phone" for="phone" />
+                    <h:inputText id="phone" value="#{accountController.address.phone}" title="Phone" />
+                    
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{accountController.create}" value="#{bundle.CreateAccountSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{accountController.prepareList}" value="#{bundle.CreateAccountShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAccountIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
