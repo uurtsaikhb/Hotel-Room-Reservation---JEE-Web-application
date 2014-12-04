@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="header_content">
+                <div class = "header_top">
+                    <div class="logo">
+                        LOGO
+                    </div>
+                    <div class="login">
+                        <p:inputText placeholder="username"/>
+                        <p:password placeholder="password" />
+                        <p:commandButton value="login" />
+                    </div>
+                </div>
+                <div class="menu" >
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+
