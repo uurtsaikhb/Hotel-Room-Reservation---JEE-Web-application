@@ -2,15 +2,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
         <ui:composition template="/template/masterLayout.xhtml">
-            
+
             <ui:define name="content">
+                <div class="search-panel-wrapper">
+                    <div class="search-panel">
+                        <h:form>
+                            <p:inputText placeholder="Search a city, hotel, landmark or destination" size="32"/>
+                            <h:panelGrid columns="3">
+                                <p:calendar id="button_checkin" showOn="button" />
+                                <p:inputText size="6"/>
+                                <p:calendar id="button_checkout" showOn="button" />
+                            </h:panelGrid>
+
+                            <p:commandButton value="Search" />
+                        </h:form>
+                    </div>
+                </div>
+                <!--
                 <br/>
                 <h:link outcome="/account/List" value="Show All Account Items"/>
                 <br />
@@ -32,8 +48,10 @@
                 <br />
                 <h:link outcome="/newEntity/List" value="Show All NewEntity Items"/>
                 <br/>
+                
+                -->
             </ui:define>
-            
+
         </ui:composition>
     </h:body>
 </html>
