@@ -3,6 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+          
+      xmlns:pa="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
@@ -15,10 +17,13 @@
                 <div class="search-panel-wrapper">
                     <div class="search-panel">
                         <h:form>
-                            <p:inputText placeholder="Search a city, hotel, landmark or destination" size="32"/>
-                            <h:panelGrid columns="3">
+                            <h:inputText pa:placeholder="Search a city, hotel, landmark or destination" size="32"/>
+                            <h:panelGrid columns="2">
+                                
+                                Checking date:
                                 <p:calendar id="button_checkin" showOn="button" />
-                                <p:inputText size="6"/>
+                                
+                                Checkout date:
                                 <p:calendar id="button_checkout" showOn="button" />
                             </h:panelGrid>
                         </h:form>
