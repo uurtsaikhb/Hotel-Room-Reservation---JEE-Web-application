@@ -13,21 +13,20 @@
                 <div class="header_content">
                     <div class = "header_top">
                         <div class="logo">
-                            LOGO
+                            <h:graphicImage library="images" name="logo.jpg" />
                         </div>
                         <div class="login">
-                            <p:inputText placeholder="username"/>
-                            <p:password placeholder="password" />
-                            <p:commandButton value="login" />
+                            <h:link outcome="login?faces-redirect=true" value="Login"/>
+                            <h:link outcome="signup?faces-redirect=true" value="Register" />
                         </div>
-                    </div>
-                    <div class="menu" >
-                        <ul>
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#news">News</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li><a href="#about">About</a></li>
-                        </ul>
+                        <div class="menu">
+                            <ul>
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#news">News</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                                <li><a href="#about">About</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

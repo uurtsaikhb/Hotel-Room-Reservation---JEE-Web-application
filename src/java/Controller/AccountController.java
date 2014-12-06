@@ -85,7 +85,7 @@ public class AccountController implements Serializable {
     public String prepareCreate() {
         current = new Account();
         selectedItemIndex = -1;
-        return "Create";
+        return "login?faces-redirect=true";
     }
 
     public String create() {
