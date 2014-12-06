@@ -85,13 +85,9 @@ body
 }
 
 .logo {
-    background-color: white;
     float: left;
-    font-family: "Raleway",sans-serif;
-    font-size: 30px;
-    font-weight: bold;
     height: 160px;
-    width: 160px
+    width: 160px;
 }
 
 .logo a
@@ -786,34 +782,39 @@ ul
 
 }
 
+.login a {
+    padding-left: 15px;
+    text-decoration: none;
+}
+
 .logo_hotel {
 
 }
 
 .header_content {
-    height: 170px;
-    width: 800px;
-    padding: 5px;
-    margin: 0 auto;
+    
 
 }
 
 .header_top {
+    height: 170px;
+    width: 800px;
+    padding: 5px;
+    margin: 0 auto;
 }
 
 
 .menu ul {
     list-style-type: none;
     margin: 0;
-    padding: 0;
     overflow: hidden;
+    padding: 0 0 0 12px;
 }
 .menu {
-    float: right;
-    height: 50px;
-    top:5px;
-    right:0;
-    padding-top: 105px;
+    font-size: 15px;
+    left: 175px;
+    position: relative;
+    top: 130px;
 }
 .menu li {
     float: left;
@@ -846,14 +847,13 @@ ul
     padding: 25px 20px 10px;
     background: #fff;
     padding-bottom: 20px;
-    height: 250px;
 }
 
 .search-panel-wrapper {
     width: 788px;
     padding: 8px;
     margin: 0 auto;
-    margin-top: 110px;
+    margin-top: 50px;
     background: rgba(0,0,0,.2);
     border-radius: 10px;
 }
