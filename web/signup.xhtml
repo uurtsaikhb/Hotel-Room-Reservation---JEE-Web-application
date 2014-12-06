@@ -13,6 +13,9 @@
                 <div class="search-panel-wrapper">
                     <div class="search-panel">
                         <h3>Register</h3>
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
                         <h:form>
                             <h:panelGrid columns="1">
                                 <p:inputText id="fname" value="#{accountController.selected.fname}" placeholder="First name" />
