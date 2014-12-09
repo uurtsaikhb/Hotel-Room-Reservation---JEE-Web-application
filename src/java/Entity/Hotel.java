@@ -13,13 +13,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 /**
  *
  * @author Ghenet
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Hotel.findByLocation",
+            query = "SELECT h FROM Hotel h WHERE h.address.city = :city AND h.address.province= :state")
+})
 public class Hotel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,6 +40,7 @@ public class Hotel implements Serializable {
     @Embedded
     private Address address;
     @OneToMany(mappedBy = "hotel")
+    @OrderBy("postedDate DESC")
     private List<Review> reviews;
 
     public Long getId() {

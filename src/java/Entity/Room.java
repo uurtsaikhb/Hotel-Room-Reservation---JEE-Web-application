@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -20,6 +22,12 @@ import javax.persistence.OneToMany;
  * @author Ghenet
  */
 @Entity
+@NamedQueries({
+@NamedQuery(name = "Room.findRoom",
+            query = "SELECT r FROM Room r WHERE r.hotel.id = :id AND r.id NOT IN ("
+                    + "SELECT rb FROM RoomBooking rb WHERE rb.dateFrom < :dateTo OR "
+                    + "rb.dateTo > :dateFrom)")
+})
 public class Room implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -4,10 +4,13 @@ import Entity.Hotel;
 import Controller.util.JsfUtil;
 import Controller.util.PaginationHelper;
 import Entity.Address;
+import Entity.Room;
 import Model.HotelFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -18,6 +21,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 
 @Named("hotelController")
 @SessionScoped
@@ -26,14 +30,40 @@ public class HotelController implements Serializable {
     private Hotel current;
     private Address address;
     private DataModel items = null;
+    private List<Hotel> hotels;
     @EJB
     private Model.HotelFacade ejbFacade;
+    @Inject
+    private RoomBookingController roomBookingController;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
     public HotelController() {
     }
+ //   @PostConstruct
+//    public void intItems(){
+//       hotels= roomBookingController.getHotels();
+//       rooms=ejbFacade.find(2).getRooms();
+//    }
 
+    public List<Hotel> getHotels() {
+        return hotels;
+    }
+  
+
+    public RoomBookingController getRoomBookingController() {
+        return roomBookingController;
+    }
+
+    public void setRoomBookingController(RoomBookingController roomBookingController) {
+        this.roomBookingController = roomBookingController;
+    }
+    
+
+    public String getListOfRooms(String id){
+        
+        return null;
+    }
     public Hotel getSelected() {
         if (current == null) {
             current = new Hotel();
@@ -79,11 +109,12 @@ public class HotelController implements Serializable {
         current = (Hotel) getItems().getRowData();
         address=current.getAddress();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "room/List";
     }
 
     public String prepareCreate() {
         current = new Hotel();
+        address=new Address();
         selectedItemIndex = -1;
         return "Create";
     }

@@ -6,11 +6,14 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -26,6 +29,8 @@ public class Review implements Serializable {
     private Hotel hotel;
     @ManyToOne
     private Account account;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date postedDate; 
     private int rank;
 
     public Long getId() {
@@ -60,6 +65,15 @@ public class Review implements Serializable {
         this.rank = rank;
     }
 
+    public Date getPostedDate() {
+        return postedDate;
+    }
+
+    public void setPostedDate(Date postedDate) {
+        this.postedDate = postedDate;
+    }
+    
+    
     
     @Override
     public int hashCode() {

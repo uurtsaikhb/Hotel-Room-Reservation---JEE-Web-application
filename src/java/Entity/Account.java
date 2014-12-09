@@ -45,7 +45,7 @@ public class Account implements Serializable {
     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
         +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
         +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-             message="{invalid.email}")
+             message="Email should be in mmm@mmm.mmm format")
     private String email;
    
     private String password;
@@ -53,6 +53,8 @@ public class Account implements Serializable {
     private Address address;
     @OneToMany(mappedBy="account")
     private List<Review> reviews;
+    @OneToMany(mappedBy="account")
+    private List<RoomBooking> roomBookings;
     
     
 
@@ -65,6 +67,11 @@ public class Account implements Serializable {
     }
 
     public Address getAddress() {
+        if(address==null)
+        {
+            address = new Address();
+            
+        }
         return address;
     }
 
@@ -112,6 +119,16 @@ public class Account implements Serializable {
         this.password = password;
     }
 
+    public List<RoomBooking> getRoomBookings() {
+        return roomBookings;
+    }
+
+    public void setRoomBookings(List<RoomBooking> roomBookings) {
+        this.roomBookings = roomBookings;
+    }
+
+   
+    
     @Override
     public int hashCode() {
         int hash = 0;

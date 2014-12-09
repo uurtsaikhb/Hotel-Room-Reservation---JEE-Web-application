@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,6 +22,13 @@ import javax.persistence.TemporalType;
  * @author Ghenet
  */
 @Entity
+@NamedQueries({
+@NamedQuery(name = "Booking.findRoom",
+            query = "SELECT DISTINCT r FROM Room r WHERE r.hotel.id = :id AND r.id NOT IN ("
+                    + "SELECT DISTINCT b.room.id FROM RoomBooking b WHERE b.dateFrom BETWEEN :dateFrom and :dateTo "
+                    + "OR b.dateTo between :dateFrom and :dateTo)")
+    
+})
 public class RoomBooking implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,6 +41,8 @@ public class RoomBooking implements Serializable {
     @ManyToOne
     private Room room;
     private int no_of_people;
+    @ManyToOne
+    private Account account;
     
             
 
@@ -74,6 +85,15 @@ public class RoomBooking implements Serializable {
     public void setNo_of_people(int no_of_people) {
         this.no_of_people = no_of_people;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+    
     
 
     @Override

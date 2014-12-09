@@ -3,10 +3,18 @@ package Controller;
 import Entity.RoomBooking;
 import Controller.util.JsfUtil;
 import Controller.util.PaginationHelper;
+import Entity.Account;
+import Entity.Hotel;
+import Entity.Room;
+import Model.HotelFacade;
 import Model.RoomBookingFacade;
+import Model.RoomFacade;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,20 +25,121 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 
 @Named("roomBookingController")
 @SessionScoped
 public class RoomBookingController implements Serializable {
 
     private RoomBooking current;
+    private Date dateFrom;
+    private Date dateTo;
+    private List<Hotel> hotels;
+    private Account account;
+    private List<Room> rooms;
     private DataModel items = null;
+    private String place;
+    @EJB 
+    private Model.HotelFacade hotelEjbFacade;
     @EJB
     private Model.RoomBookingFacade ejbFacade;
+    @EJB
+    private BookingController bookingController;
+    @EJB
+    private RoomFacade roomFacade;
+    @Inject
+    private LoginController loginController;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
     public RoomBookingController() {
     }
+    
+    @PostConstruct
+    public void initAccount(){
+        account = (Account)loginController.getAccount();
+    }
+    
+
+    public Account getAccount() {
+        if(account==null){
+            account = new Account();
+        }
+        return account;
+    }
+    
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    
+    public RoomFacade getRoomFacade() {
+        return roomFacade;
+    }
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+        getSelected().setDateFrom(dateFrom);
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
+        getSelected().setDateTo(dateTo);
+    }
+    
+    
+    
+      public List<Hotel> getHotels() {
+        return hotels;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+  
+
+    public HotelFacade getHotelEjbFacade() {
+        return hotelEjbFacade;
+    }
+
+    public void setHotelEjbFacade(HotelFacade hotelEjbFacade) {
+        this.hotelEjbFacade = hotelEjbFacade;
+    }
+
+    
+
+    public void setHotels(List<Hotel> hotels) {
+        this.hotels = hotels;
+    }
+
+    
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    
+    public BookingController getBookingController() {
+        return bookingController;
+    }
+
+    public void setBookingController(BookingController bookingController) {
+        this.bookingController = bookingController;
+    }
+    
+    
 
     public RoomBooking getSelected() {
         if (current == null) {
@@ -78,11 +187,34 @@ public class RoomBookingController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+    public String findHotels(){
+        hotels=getHotelEjbFacade().findHotelByLocation(place);
+        return "/hotel/ListOfHotels";
+    }
+     public String findHotelById(Long id){
+        rooms = getFacade().findAvailabileRooms(id, getDateFrom(), getDateTo());
+      // rooms=getHotelEjbFacade().find(id).getRooms();
+       
+     return  "/room/ListOfRooms";
+  }
+    public String addingRoom(Room room) {
+        current.setRoom(room);
+        if(account!=null){
+            create();
+            return "/index";
+        }
+        else{
+            return "/roomBooking/Form";
+        }
+        
+    }
 
     public String create() {
+        current.setAccount(account);
         try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RoomBookingCreated"));
+            getBookingController().addAccount(account);
+            getBookingController().createBooking(current);
+            
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));

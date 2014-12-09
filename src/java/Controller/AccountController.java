@@ -84,16 +84,31 @@ public class AccountController implements Serializable {
 
     public String prepareCreate() {
         current = new Account();
+        address=new Address();
         selectedItemIndex = -1;
-        return "login?faces-redirect=true";
+        return "Create";
+    }
+    public boolean accountExist(String email) {
+        Account accountByEmail=null;
+        boolean exists = false;
+        accountByEmail= getFacade().findAccountByEmail(email);
+        if(accountByEmail!=null)
+            exists=true;
+        return exists;
     }
 
     public String create() {
         current.setAddress(address);
         try {
+            if(!accountExist(current.getEmail())){
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AccountCreated"));
             return prepareCreate();
+            }
+            else{
+             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("emailExist"));
+            return null;
+            }
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

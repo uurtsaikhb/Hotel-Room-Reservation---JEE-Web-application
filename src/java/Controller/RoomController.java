@@ -6,7 +6,9 @@ import Controller.util.PaginationHelper;
 import Model.RoomFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,21 +19,38 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 
 @Named("roomController")
 @SessionScoped
 public class RoomController implements Serializable {
 
     private Room current;
+    private List<Room> rooms;
     private DataModel items = null;
     @EJB
     private Model.RoomFacade ejbFacade;
+    @Inject
+    private HotelController hotelController;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
     public RoomController() {
     }
 
+    public HotelController getHotelController() {
+        return hotelController;
+    }
+
+//    @PostConstruct
+//    public void setInit(){
+//        rooms= hotelController.getRooms();
+//    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+    
     public Room getSelected() {
         if (current == null) {
             current = new Room();

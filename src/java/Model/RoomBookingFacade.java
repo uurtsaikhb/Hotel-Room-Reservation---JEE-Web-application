@@ -5,10 +5,16 @@
  */
 package Model;
 
+import Entity.Room;
 import Entity.RoomBooking;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +32,22 @@ public class RoomBookingFacade extends AbstractFacade<RoomBooking> {
 
     public RoomBookingFacade() {
         super(RoomBooking.class);
+    }
+    public List<Room> findAvailabileRooms(Long id, Date checkin, Date checkout){
+        List<Room> rooms;
+        rooms= new ArrayList<>();
+        try{
+            Query query = em.createNamedQuery("Booking.findRoom");
+            query.setParameter("id", id);
+            query.setParameter("dateTo", checkout);
+            query.setParameter("dateFrom", checkin);
+            rooms= query.getResultList();
+            return rooms;
+        }
+        catch (NoResultException e) {
+            return null;
+    }
+        
     }
     
 }

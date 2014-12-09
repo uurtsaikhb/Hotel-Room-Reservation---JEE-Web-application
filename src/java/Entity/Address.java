@@ -22,7 +22,7 @@ public class Address implements Serializable {
     @Size(min = 5, max = 5)
     private String zipCode;
     @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
-             message="{invalid.phonenumber}")
+             message="Phone should be in 111-111-1111 format")
     private String phone;
 
     public String getStreet() {
