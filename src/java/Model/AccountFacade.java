@@ -31,7 +31,7 @@ public class AccountFacade extends AbstractFacade<Account> {
     }
     
     public Account findAccountByEmail(String email){
-        Account account=null;
+        Account account=new Account();
         try{
         Query query = em.createNamedQuery("Account.findByemail");
         query.setParameter("email", email);

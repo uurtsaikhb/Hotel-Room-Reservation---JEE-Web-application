@@ -2,15 +2,18 @@ root {
     display: block;
 }
 
-body {
+/*body {
+    padding-top: 100px;
     font-family: Arial, Helvetica, sans-serif;
-    color: #3a4f54;
-    background-color: #dfecf1;
-    font-size: small;
-}
+    color: darkgrey;
+    background-color: darkgrey;
+    font-size: larger;
+    font-weight: bolder;
+}*/
 
 a {
     color: #e33b06;
+    text-decoration: none;
 }
 
 table {
@@ -18,7 +21,7 @@ table {
 }
 
 form.jsfcrud_list_form th, td th {
-    font-size: x-small;
+    font-size: large;
     color: #4e6a71;
     border-top-style: solid;
     border-bottom-style: solid;
@@ -44,7 +47,7 @@ form.jsfcrud_list_form th, td th {
 td {
     vertical-align: top;
     padding-bottom: 8px;
-    font-size: small;
+    font-size: large;
 }
 
 form.jsfcrud_list_form td, td td {
@@ -79,4 +82,18 @@ tr.jsfcrud_even_row {
     position: absolute;
     left: 50%;
     top: 50%;
+}
+#login{
+    background-color: antiquewhite;
+    margin: auto;
+    float: none;
+}
+.errormessage{
+    color: red;
+    font-size: small;
+    list-style-type: none;
+    padding-left: 0px;
+}
+#hotelinfo{
+    margin-left: 50px;
 }

@@ -1,62 +1,54 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-          
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:pa="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-    </h:head>
-    <h:body>
-        <ui:composition template="/template/masterLayout.xhtml">
 
-            <ui:define name="content">
-                <div class="search-panel-wrapper">
-                    <div class="search-panel">
-                        <h:form>
-                            <h:inputText pa:placeholder="Search a city, hotel, landmark or destination" size="32"/>
-                            <h:panelGrid columns="2">
-                                
-                                Checking date:
-                                <p:calendar id="button_checkin" showOn="button" />
-                                
-                                Checkout date:
-                                <p:calendar id="button_checkout" showOn="button" />
-                            </h:panelGrid>
-                        </h:form>
-                        <p:commandButton value="Search" action="hotelView?faces-redirect=true"/>
-                    </div>
+    <ui:composition template="/template/masterLayout.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRoomBookingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <div class="search-panel-wrapper">
+            <div class="search-panel">
+            <h:form>
+
+                <h:inputText id="place" value="#{roomBookingController.place}" pa:placeholder="City, State" size="64"/><br/>
+                <p:outputLabel id="hide" value="Please enter you destination in City, State format"/><br/> 
+                <h:panelGrid columns="2">
+                    <h:panelGroup>
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateFrom}" for="dateFrom" /><br/>
+                        <p:calendar id="dateFrom" value="#{roomBookingController.dateFrom}" 
+                                    title="#{bundle.CreateRoomBookingTitle_dateFrom}" pattern="MM/dd/yyyy" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT-6"/>
+                        </p:calendar>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateTo}" for="dateTo" /><br/>
+                        <p:calendar id="dateTo" value="#{roomBookingController.dateTo}" 
+                                    title="#{bundle.CreateRoomBookingTitle_dateTo}" pattern="MM/dd/yyyy" >
+                            <f:ajax event="change" execute="dateFrom dateTo" render="@all"></f:ajax>
+                            <f:convertDateTime pattern="MM/dd/yyyy"  timeZone="GMT-6"/>
+                        </p:calendar>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_no_of_people}" for="no_of_people" />
+                        <br/>
+                        <h:inputText id="no_of_people" value="#{roomBookingController.selected.no_of_people}" title="#{bundle.CreateRoomBookingTitle_no_of_people}" />
+                    </h:panelGroup><br/>
+                <h:commandButton action="#{roomBookingController.findHotels}" value="Search" /><br/>
+                </h:panelGrid>
+            </h:form>
                 </div>
-                <!--
-                <br/>
-                <h:link outcome="/account/List" value="Show All Account Items"/>
-                <br />
-                <h:link outcome="/administrator/List" value="Show All Administrator Items"/>
-                <br />
-                <h:link outcome="/customer/List" value="Show All Customer Items"/>
-                <br />
-                <h:link outcome="/featureHotel/List" value="Show All FeatureHotel Items"/>
-                <br />
-                <h:link outcome="/featureRoom/List" value="Show All FeatureRoom Items"/>
-                <br />
-                <h:link outcome="/hotel/List" value="Show All Hotel Items"/>
-                <br />
-                <h:link outcome="/review/List" value="Show All Review Items"/>
-                <br />
-                <h:link outcome="/room/List" value="Show All Room Items"/>
-                <br />
-                <h:link outcome="/roomBooking/List" value="Show All RoomBooking Items"/>
-                <br />
-                <h:link outcome="/newEntity/List" value="Show All NewEntity Items"/>
-                <br/>
-                
-                -->
-            </ui:define>
+            </div>
+        </ui:define>
+    </ui:composition>
 
-        </ui:composition>
-    </h:body>
 </html>
-

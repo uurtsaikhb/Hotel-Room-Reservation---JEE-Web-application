@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.Login}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            
+            <h:form>
+
+                <h:panelGrid id ="login" columns="2">
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_email}" for="email" />
+                    <h:panelGroup>
+                        <p:inputText id="email" value="#{loginController.email}" title="#{bundle.CreateAccountTitle_email}" required="true"
+                                     requiredMessage="Please enter your email."/>
+                        <p:watermark for="email" value="Email" />
+                    </h:panelGroup>
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_password}" for="password" />
+                    <h:panelGroup>
+                        <h:inputSecret id="password" value="#{loginController.password}" title="#{bundle.CreateAccountTitle_password}" required="true"
+                                       requiredMessage="Please enter your Password."/><br/>
+
+                        <p:watermark for="password" value="Password" />
+                    </h:panelGroup><br/>
+                    <h:panelGroup class="errormessage" layout="block">
+                        <h:messages class="errormessage" errorStyle="color: red" infoStyle="color: green" layout="block"/>
+                    </h:panelGroup>
+                    <h:commandButton value="Login" action="#{loginController.login}"/>
+                    <h:button value="Sign Up" outcome="account/Create.xhtml" />
+                </h:panelGrid>           
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

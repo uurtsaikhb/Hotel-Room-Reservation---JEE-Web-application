@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Please enter your detail below"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:commandLink action="#{loginController.checkLogin}" immediate="true">Members login 
+                    <f:param name="url" value="roomBooking/payment"/>
+            </h:commandLink>  
+                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_fname}" for="fname" />
+                    <h:inputText id="fname" value="#{roomBookingController.account.fname}" title="#{bundle.CreateAccountTitle_fname}" >
+                    <f:ajax event="blur" execute="fname" render="fnamepay"></f:ajax>
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_lname}" for="lname" />
+                    <h:inputText id="lname" value="#{roomBookingController.account.lname}" title="#{bundle.CreateAccountTitle_lname}">
+                        <f:ajax event="blur" execute="lname" render="lnamepay"></f:ajax>
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{roomBookingController.account.email}" title="#{bundle.CreateAccountTitle_email}" />
+                    <h:outputLabel value="Payment details"/><br/>
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_fname}" for="fname" />
+                    <h:inputText id="fnamepay" value="#{roomBookingController.account.fname}" title="#{bundle.CreateAccountTitle_fname}" />
+                    <h:outputLabel value="#{bundle.CreateAccountLabel_lname}" for="lname" />
+                    <h:inputText id="lnamepay" value="#{roomBookingController.account.lname}" title="#{bundle.CreateAccountTitle_lname}" />
+                    <h:outputLabel value="Card type" for="cardType"/>
+                    <h:selectOneMenu  value="#{roomBookingController.place}">
+                        <f:selectItem itemValue="american" itemLabel="American Express" />  
+                        <f:selectItem itemValue="dinner" itemLabel="Dinner's Club" />  
+                        <f:selectItem itemValue="discover" itemLabel="Discover" />  
+                        <f:selectItem itemValue="master" itemLabel="Master Card" />  
+                        <f:selectItem itemValue="visa" itemLabel="Visa" />
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Street" for="street" />
+                    <h:inputText id="street" value="#{roomBookingController.account.address.street}" title="Street" />
+                    <h:outputLabel value="City" for="city" />
+                    <h:inputText id="city" value="#{roomBookingController.account.address.city}" title="City" />
+                    <h:outputLabel value="State" for="state" />
+                    <h:inputText id="state" value="#{roomBookingController.account.address.province}" title="State" />
+                    <h:outputLabel value="Zip Code" for="zipCode" />
+                    <h:inputText id="zipCode" value="#{roomBookingController.account.address.zipCode}" title="Zip Code" />
+                    <h:outputLabel value="Phone" for="phone" />
+                    <h:inputText id="phone" value="#{roomBookingController.account.address.phone}" title="Phone" />
+                    <br/>
+                    <h:commandButton value="Submit" action="#{roomBookingController.create}"/>
+                    
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -6,7 +6,7 @@ public abstract class PaginationHelper {
 
     private int pageSize;
     private int page;
-
+ 
     public PaginationHelper(int pageSize) {
         this.pageSize = pageSize;
     }

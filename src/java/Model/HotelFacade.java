@@ -20,7 +20,6 @@ import javax.persistence.Query;
  */
 @Stateless
 public class HotelFacade extends AbstractFacade<Hotel> {
-
     @PersistenceContext(unitName = "HotelsReservationPU")
     private EntityManager em;
 
@@ -32,20 +31,20 @@ public class HotelFacade extends AbstractFacade<Hotel> {
     public HotelFacade() {
         super(Hotel.class);
     }
-
-    public List<Hotel> findHotelByLocation(String location) {
+    public List<Hotel> findHotelByLocation(String location){
         List<Hotel> hotels;
-        hotels = new ArrayList();
-        try {
-            String[] loc = location.split(", ");
-            Query query = em.createNamedQuery("Hotel.findByLocation");
-            query.setParameter("city", loc[0]);
-            query.setParameter("state", loc[1]);
-            hotels = query.getResultList();
-            return hotels;
-        } catch (NoResultException e) {
-            return null;
+        hotels = new ArrayList<>();
+        try{
+        String [] loc = location.split(", ");
+        Query query = em.createNamedQuery("Hotel.findByLocation");
+        query.setParameter("city", loc[0]);
+        query.setParameter("state", loc[1]);
+        hotels=query.getResultList();
+        return hotels;
         }
+        catch (NoResultException e) {
+            return null;
     }
-
+    } 
+    
 }

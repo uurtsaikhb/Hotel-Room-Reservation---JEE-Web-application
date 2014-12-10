@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Login</title>
     </h:head>
     <h:body>
         <ui:composition template="/template/masterLayout.xhtml">
@@ -15,9 +15,14 @@
                         <h3>Login</h3>
                         <h:form>
                             <h:panelGrid columns="1">
-                                <p:inputText placeholder="Username"/>
-                                <p:password placeholder="Password" />
-                                <p:commandButton value="Login" />
+                                <p:inputText placeholder="Email" id="email" value="#{loginController.email}" title="#{bundle.CreateAccountTitle_email}" required="true"
+                                             requiredMessage="Please enter your email."/>
+                                <p:password placeholder="Password" id="password" value="#{loginController.password}" title="#{bundle.CreateAccountTitle_password}" required="true"
+                                            requiredMessage="Please enter your Password."/>
+                                <h:panelGroup>
+                                <h:commandButton value="Login" action="#{loginController.login}"/>
+                                <h:commandButton value="Sign Up" action="/account/Create.xhtml" immediate="true" />
+                                </h:panelGroup>
                             </h:panelGrid>
                         </h:form>
                     </div>

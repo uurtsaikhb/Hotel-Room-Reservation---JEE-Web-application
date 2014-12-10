@@ -9,7 +9,6 @@ import Entity.Room;
 import Model.HotelFacade;
 import Model.RoomBookingFacade;
 import Model.RoomFacade;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -96,8 +95,6 @@ public class RoomBookingController implements Serializable {
         getSelected().setDateTo(dateTo);
     }
     
-    
-    
       public List<Hotel> getHotels() {
         return hotels;
     }
@@ -106,7 +103,6 @@ public class RoomBookingController implements Serializable {
         return rooms;
     }
   
-
     public HotelFacade getHotelEjbFacade() {
         return hotelEjbFacade;
     }
@@ -114,8 +110,6 @@ public class RoomBookingController implements Serializable {
     public void setHotelEjbFacade(HotelFacade hotelEjbFacade) {
         this.hotelEjbFacade = hotelEjbFacade;
     }
-
-    
 
     public void setHotels(List<Hotel> hotels) {
         this.hotels = hotels;
@@ -139,8 +133,6 @@ public class RoomBookingController implements Serializable {
         this.bookingController = bookingController;
     }
     
-    
-
     public RoomBooking getSelected() {
         if (current == null) {
             current = new RoomBooking();
@@ -200,8 +192,9 @@ public class RoomBookingController implements Serializable {
     public String addingRoom(Room room) {
         current.setRoom(room);
         if(account!=null){
-            create();
-            return "/index";
+            current.setAccount(account);
+            getBookingController().createBooking(current);
+            return "/roomBooking/Confirmation";
         }
         else{
             return "/roomBooking/Form";
@@ -210,12 +203,13 @@ public class RoomBookingController implements Serializable {
     }
 
     public String create() {
+        //account = loginController.getAccount();
         current.setAccount(account);
         try {
             getBookingController().addAccount(account);
             getBookingController().createBooking(current);
             
-            return prepareCreate();
+            return "/roomBooking/Confirmation";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

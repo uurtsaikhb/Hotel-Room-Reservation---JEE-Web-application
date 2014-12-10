@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pa="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/template/masterLayout.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.CreateRoomBookingTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="body">
+        <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
+            <div class="search-panel-wrapper">
+            <div class="search-panel">
             <h:form>
+
+                <h:inputText id="place" value="#{roomBookingController.place}" pa:placeholder="City, State" size="64"/><br/>
+                <p:outputLabel id="hide" value="Please enter you destination in City, State format"/><br/> 
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{roomBookingController.selected.id}" title="#{bundle.CreateRoomBookingTitle_id}" />
-                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateFrom}" for="dateFrom" />
-                 <p:calendar id="dateFrom" styleClass="ui-calendar-inputStyle" pattern="MM/dd/yyyy" required="true" value="#{roomBookingController.selected.dateFrom}" >                            
+                    <h:panelGroup>
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateFrom}" for="dateFrom" /><br/>
+                        <p:calendar id="dateFrom" value="#{roomBookingController.dateFrom}" 
+                                    title="#{bundle.CreateRoomBookingTitle_dateFrom}" pattern="MM/dd/yyyy" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT-6"/>
                         </p:calendar>
-                    
-                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateTo}" for="dateTo" />
-                    
-                     <p:calendar id="dateTo" styleClass="ui-calendar-inputStyle" pattern="MM/dd/yyyy" required="true" value="#{roomBookingController.selected.dateTo}" >                            
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateTo}" for="dateTo" /><br/>
+                        <p:calendar id="dateTo" value="#{roomBookingController.dateTo}" 
+                                    title="#{bundle.CreateRoomBookingTitle_dateTo}" pattern="MM/dd/yyyy" >
+                            <f:ajax event="change" execute="dateFrom dateTo" render="@all"></f:ajax>
+                            <f:convertDateTime pattern="MM/dd/yyyy"  timeZone="GMT-6"/>
                         </p:calendar>
-                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_room}" for="room" />
-                    <h:selectOneMenu id="room" value="#{roomBookingController.selected.room}" title="#{bundle.CreateRoomBookingTitle_room}" >
-                        <f:selectItems value="#{roomController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateRoomBookingLabel_no_of_people}" for="no_of_people" />
-                    <h:inputText id="no_of_people" value="#{roomBookingController.selected.no_of_people}" title="#{bundle.CreateRoomBookingTitle_no_of_people}" />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_no_of_people}" for="no_of_people" />
+                        <br/>
+                        <h:inputText id="no_of_people" value="#{roomBookingController.selected.no_of_people}" title="#{bundle.CreateRoomBookingTitle_no_of_people}" />
+                    </h:panelGroup>
+                <h:commandButton action="#{roomBookingController.findHotels}" value="Search" /><br/>
                 </h:panelGrid>
-                <br />
-                <h:commandLink action="#{roomBookingController.create}" value="#{bundle.CreateRoomBookingSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{roomBookingController.prepareList}" value="#{bundle.CreateRoomBookingShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateRoomBookingIndexLink}"/>
             </h:form>
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 
