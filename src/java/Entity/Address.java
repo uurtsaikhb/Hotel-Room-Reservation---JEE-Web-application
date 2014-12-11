@@ -65,6 +65,11 @@ public class Address implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    @Override
+    public String toString() {
+        return  street + ", " + city + ", " + province + ", " + zipCode + ", " + phone ;
+    }
     
     
 }

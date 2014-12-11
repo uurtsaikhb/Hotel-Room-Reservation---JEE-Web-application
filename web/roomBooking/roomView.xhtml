@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>List of Hotels</title>
+        
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/masterLayout.xhtml">
+            <ui:define name="header" >
+
+                <p:carousel autoPlayInterval="10000" numVisible="1"
+                            effect="easeInStrong" circular="true" vertical="true" itemStyleClass="photo">
+                    <f:facet name="header">
+
+                    </f:facet>      
+                    <p:tab title="">
+                        <p:graphicImage  height="153.167px" width="1592px" name="images/roomImg.jpg" />
+                    </p:tab>
+                    <p:tab title="">
+                        <p:graphicImage  height="153.167px" width="1592px" name="images/roomImg.jpg" />
+                    </p:tab>
+                </p:carousel>
+
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <div class="hotel-list">
+                        <div class="hotel-list-content">
+                            <ui:repeat value="#{roomBookingController.rooms}" var="item">
+                                <div class="hotel-list-hotel">
+                                    <h:panelGrid class="hotellist" columns="4">
+                                        <h:panelGroup> 
+                                            #{item.type}<br/>
+                                            future will be here<br/>
+                                            <div class="hotel-list-image">
+                                                <h:graphicImage library="images" name="roomImg.jpg" width="160"/>
+                                            </div>
+                                        </h:panelGroup>
+                                        <h:panelGroup>
+                                            #{item.max}<br/>
+                                        </h:panelGroup>
+                                        USD #{item.price}
+                                        <h:commandButton action="#{roomBookingController.addingRoom(item)}" value="Book"/>
+                                    </h:panelGrid>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </h:form>
+
+            </ui:define>
+           
+        </ui:composition>
+    </h:body>
+</html>
+
+    

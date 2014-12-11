@@ -6,6 +6,7 @@ import Controller.util.PaginationHelper;
 import Entity.Account;
 import Entity.Hotel;
 import Entity.Room;
+import Model.AccountFacade;
 import Model.HotelFacade;
 import Model.RoomBookingFacade;
 import Model.RoomFacade;
@@ -46,6 +47,7 @@ public class RoomBookingController implements Serializable {
     private BookingController bookingController;
     @EJB
     private RoomFacade roomFacade;
+   
     @Inject
     private LoginController loginController;
     private PaginationHelper pagination;
@@ -72,6 +74,7 @@ public class RoomBookingController implements Serializable {
         this.account = account;
     }
 
+    
     
     public RoomFacade getRoomFacade() {
         return roomFacade;
@@ -180,33 +183,47 @@ public class RoomBookingController implements Serializable {
         return "Create";
     }
     public String findHotels(){
+        if(getBookingController().validateDate(dateFrom, dateTo)){
         hotels=getHotelEjbFacade().findHotelByLocation(place);
-        return "/hotel/ListOfHotels";
+        return "/roomBooking/hotelView";
+        }
+        else
+        {
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("DateError"));
+           return null; 
+        }
     }
      public String findHotelById(Long id){
         rooms = getFacade().findAvailabileRooms(id, getDateFrom(), getDateTo());
       // rooms=getHotelEjbFacade().find(id).getRooms();
        
-     return  "/room/ListOfRooms";
+     return  "/roomBooking/roomView";
   }
     public String addingRoom(Room room) {
         current.setRoom(room);
+        account=loginController.getAccount();
         if(account!=null){
-            current.setAccount(account);
-            getBookingController().createBooking(current);
-            return "/roomBooking/Confirmation";
+            return "/roomBooking/payment";
         }
         else{
             return "/roomBooking/Form";
         }
         
     }
+    public String createAccount(){
+       getBookingController().addAccount(account);
+        return "/roomBooking/payment";
+    }
 
     public String create() {
-        //account = loginController.getAccount();
+       
+        if(loginController.getAccount()!=null)
+             account = loginController.getAccount();
+       
         current.setAccount(account);
+        
         try {
-            getBookingController().addAccount(account);
+            
             getBookingController().createBooking(current);
             
             return "/roomBooking/Confirmation";

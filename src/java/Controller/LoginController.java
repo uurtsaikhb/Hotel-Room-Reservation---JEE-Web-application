@@ -121,7 +121,8 @@ public class LoginController implements Serializable {
 	public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         isLoggedIn = false;
-        return "loggedOut";
+        JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("signin"));
+        return "/index";
     }
 
 }

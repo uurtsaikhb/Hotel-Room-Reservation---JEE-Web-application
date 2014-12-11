@@ -86,7 +86,7 @@ public class AccountController implements Serializable {
         current = new Account();
         address=new Address();
         selectedItemIndex = -1;
-        return "Create";
+        return "/login";
     }
     public boolean accountExist(String email) {
         Account accountByEmail=null;
@@ -102,7 +102,7 @@ public class AccountController implements Serializable {
         try {
             if(!accountExist(current.getEmail())){
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AccountCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("signin"));
             return prepareCreate();
             }
             else{
@@ -122,9 +122,9 @@ public class AccountController implements Serializable {
         return "Edit";
     }
 
-    public String update() {
+    public String update(Account account) {
         try {
-            getFacade().edit(current);
+            getFacade().edit(account);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AccountUpdated"));
             return "View";
         } catch (Exception e) {

@@ -13,16 +13,20 @@
                 <div class="header_content">
                     <div class = "header_top">
                         <div class="logo">
-                            <h:graphicImage library="images" name="logo.jpg" />
+                            <a href="../index.xhtml" > <h:graphicImage library="images" name="logo.jpg" /></a>
                         </div>
                         <div class="login">
-                            <h:link outcome="/login?faces-redirect=true" value="Login"/>
-                            <h:link outcome="/account/Create?faces-redirect=true" value="Register" />
+                            <h:form>
+                                <h:commandLink class="link" action="/account/View?faces-redirect=true" value="#{loginController.account.fname}" rendered="#{loginController.isLoggedIn}"/>
+                                <h:commandLink class="link" action="#{loginController.logout}" value="Logout" rendered="#{loginController.isLoggedIn}"/>
+                                <h:commandLink class="link" action="/login?faces-redirect=true" value="Login" rendered="#{!loginController.isLoggedIn}"/>
+                                <h:commandLink class="link" action="/account/Create?faces-redirect=true" value="Register" rendered="#{!loginController.isLoggedIn}" />
+                            </h:form>
                         </div>
                         <div class="menu">
                             <ul>
-                                 <li><a href="#home">Home</a></li>
-                                <li><a href="#news">News</a></li>
+                                 <li><a href="../index.xhtml">Home</a></li>
+                                <li><a href="#news">Review</a></li>
                                 <li><a href="#contact">Contact</a></li>
                                 <li><a href="#about">About</a></li>
                             </ul>

@@ -194,6 +194,7 @@ public class HotelController implements Serializable {
             current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
+   
 
     public DataModel getItems() {
         if (items == null) {

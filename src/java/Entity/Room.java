@@ -38,6 +38,7 @@ public class Room implements Serializable {
     private String type;
     private String smoking;
     private double price;
+    private int max;
     @OneToMany(mappedBy="room")
     private List<RoomBooking> roomBookings;
     @ManyToMany(mappedBy="rooms")
@@ -94,12 +95,21 @@ public class Room implements Serializable {
         this.price = price;
     }
 
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    
     public List<FeatureRoom> getFeatureRooms() {
         return featureRooms;
     }
 
-    public void setFeatureRooms(List<FeatureRoom> featureRooms) {
-        this.featureRooms = featureRooms;
+    public void setFeatureRooms(FeatureRoom featureRooms) {
+        this.featureRooms.add(featureRooms);
     }
 
     

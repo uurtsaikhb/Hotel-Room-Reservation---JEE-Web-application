@@ -6,36 +6,42 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/template/masterLayout.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ConfirmationThankyou}"></h:outputText>
+            Confirmation 
+        </ui:define>
+
+        <ui:define name="content">
+
+            <div class="search-panel-wrapper">
+                <div class="search-panel">
+                    <h:outputText value="#{bundle.ConfirmationThankyou}"></h:outputText>
             <br/>
             <h:outputLabel value="#{bundle.Confirmed}"/>
-        </ui:define>
-        <ui:define name="body">
-            
-            <h:form>
-                <h:panelGrid  id="hotelinfo" columns="1">
-                    <h:outputLabel id="hotelName" value="#{roomBookingController.selected.room.hotel.name}"/>
-                    <h:outputLabel id="hotelAddressCity" value="#{roomBookingController.selected.room.hotel.address.city}"/>
-                    <h:outputLabel id="hotelAddressState" value="#{roomBookingController.selected.room.hotel.address.province}"/>
-                </h:panelGrid>
-                <h:panelGrid columns="2">
-                    <h:outputLabel for="checkin" value="Check in:"/>
-                    <h:outputLabel id="checkin" value="#{roomBookingController.selected.dateFrom}">
-                        <f:convertDateTime dateStyle="full" timeZone="EST" type="date"/>
-                    </h:outputLabel>
-                    <h:outputLabel for="checkout" value="Check out:"/>
-                    <h:outputLabel id="checkout" value="#{roomBookingController.selected.dateTo}">
-                        <f:convertDateTime dateStyle="full" timeZone="EST" type="date"/>
-                    </h:outputLabel>
-                    <h:outputLabel for="totalNum" value="Total rooms:"/>
-                    <h:outputLabel id="totalNum" value="1"/>
-                    <h:outputLabel for="roomType" value="Room type:"/>
-                    <h:outputLabel id="roomType" value="#{roomBookingController.selected.room.type}"/>
+                    <h:form>
+                        <h:panelGrid  id="hotelinfo" columns="1">
+                            <h:outputLabel id="hotelName" value="#{roomBookingController.selected.room.hotel.name}"/>
+                            <h:outputLabel id="hotelAddressCity" value="#{roomBookingController.selected.room.hotel.address.city}"/>
+                            <h:outputLabel id="hotelAddressState" value="#{roomBookingController.selected.room.hotel.address.province}"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="checkin" value="Check in:"/>
+                            <h:outputLabel id="checkin" value="#{roomBookingController.selected.dateFrom}">
+                                <f:convertDateTime dateStyle="full" timeZone="EST" type="date"/>
+                            </h:outputLabel>
+                            <h:outputLabel for="checkout" value="Check out:"/>
+                            <h:outputLabel id="checkout" value="#{roomBookingController.selected.dateTo}">
+                                <f:convertDateTime dateStyle="full" timeZone="EST" type="date"/>
+                            </h:outputLabel>
+                            <h:outputLabel for="totalNum" value="Total rooms:"/>
+                            <h:outputLabel id="totalNum" value="1"/>
+                            <h:outputLabel for="roomType" value="Room type:"/>
+                            <h:outputLabel id="roomType" value="#{roomBookingController.selected.room.type}"/>
 
-                </h:panelGrid>
-            </h:form>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 

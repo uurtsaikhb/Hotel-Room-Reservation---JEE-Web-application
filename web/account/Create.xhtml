@@ -11,6 +11,9 @@
             <h:outputText value="#{bundle.CreateAccountTitle}"></h:outputText>
         </ui:define>
         <ui:define name="content">
+            <div class="search-panel-wrapper">
+                    <div class="search-panel">
+                        <h3>Register</h3>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -26,32 +29,11 @@
                                 <p:inputText id="zipCode" value="#{accountController.address.zipCode}" placeholder="Zip" />
                                 <p:inputText id="phone" value="#{accountController.address.phone}" placeholder="Phone" />
                             </h:panelGrid>
-<!--                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateAccountLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{accountController.selected.id}" title="#{bundle.CreateAccountTitle_id}" />
-                    <h:outputLabel value="#{bundle.CreateAccountLabel_fname}" for="fname" />
-                    <h:inputText id="fname" value="#{accountController.selected.fname}" title="#{bundle.CreateAccountTitle_fname}" />
-                    <h:outputLabel value="#{bundle.CreateAccountLabel_lname}" for="lname" />
-                    <h:inputText id="lname" value="#{accountController.selected.lname}" title="#{bundle.CreateAccountTitle_lname}" />
-                    <h:outputLabel value="#{bundle.CreateAccountLabel_email}" for="email" />
-                    <h:inputText id="email" value="#{accountController.selected.email}" title="#{bundle.CreateAccountTitle_email}" />
-                    <h:outputLabel value="#{bundle.CreateAccountLabel_password}" for="password" />
-                    <h:inputSecret id="password" value="#{accountController.selected.password}" title="#{bundle.CreateAccountTitle_password}" />
-                    <h:outputLabel value="Street" for="street" />
-                    <h:inputText id="street" value="#{accountController.address.street}" title="Street" />
-                    <h:outputLabel value="City" for="city" />
-                    <h:inputText id="city" value="#{accountController.address.city}" title="City" />
-                    <h:outputLabel value="State" for="state" />
-                    <h:inputText id="state" value="#{accountController.address.province}" title="State" />
-                    <h:outputLabel value="Zip Code" for="zipCode" />
-                    <h:inputText id="zipCode" value="#{accountController.address.zipCode}" title="Zip Code" />
-                    <h:outputLabel value="Phone" for="phone" />
-                    <h:inputText id="phone" value="#{accountController.address.phone}" title="Phone" />
-                    
-                </h:panelGrid>-->
                 <br />
                 <h:commandButton action="#{accountController.create}" value="#{bundle.CreateAccountSaveLink}" />
             </h:form>
+                    </div>
+            </div>
         </ui:define>
     </ui:composition>
 

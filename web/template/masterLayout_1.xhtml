@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'></link>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"></link>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="jsfcrud.css"></h:outputStylesheet>
+        
+	<link rel="stylesheet" href="./hi_files/bootstrap.min.css" type="text/css"/>
+	<link rel="stylesheet" href="./hi_files/bootstrap-responsive.min.css" type="text/css"/>
+	<link rel="stylesheet" href="./hi_files/hotel.css" type="text/css"/>
+	<link rel="stylesheet" href="./hi_files/hotel-responsive.css" type="text/css"/>
+
+		<link rel="stylesheet" href="./hi_files/default.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="./hi_files/nivo-slider.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="./hi_files/socialcount-with-icons.css" type="text/css" media="screen"/>
+	
+
+    </h:head>
+    <h:body>
+        <div class="header">
+            <ui:insert name="header">
+                <ui:include src="../section/header.xhtml"/>
+            </ui:insert> 
+        </div>
+
+        <div>
+            <ui:insert name="content">
+                <div class="row-fluid slideshow-row">
+	
+	<div class="span12 slideshow">
+		<div class="slider-wrapper theme-default">
+			<div class="ribbon"></div>
+			<div id="nivoslider-125" class="nivoSlider">
+				<img src="./images/roomImg.jpg" alt="" style="width: 940px; visibility: hidden; display: inline;"/>
+				<img src="./hi_files/roomImg.jpg" alt="" style="width: 940px; visibility: hidden; display: inline;"/>
+				<img src="./hi_files/slide-3.png" alt="" style="width: 940px; visibility: hidden; display: inline;"/>
+			<img class="nivo-main-image" src="./hi_files/slide-2.png" style="display: inline; height: 330px; overflow: hidden;"/><div class="nivo-caption"></div><div class="nivo-directionNav"><a class="nivo-prevNav">Prev</a><a class="nivo-nextNav">Next</a></div><div class="nivo-box" name="0" rel="0" style="opacity: 0; left: 0px; top: 0px; width: 118px; height: 330px;">
+                            <img src="./hi_files/slide-3.png" style="position:absolute; width:940px; height:auto; display:block; top:-0px; left:-0px;"/></div><div class="nivo-box" name="1" rel="0" style="opacity: 0; left: 118px; top: 0px; width: 118px; height: 330px;">
+                                <img src="./hi_files/slide-3.png" style="position:absolute; width:940px; height:auto; display:block; top:-0px; left:-118px;"/></div>
+                        <div class="nivo-box" name="2" rel="0" style="opacity: 0; left: 236px; top: 0px; width: 118px; height: 330px;">
+		</div>
+		<div id="nivoslider-125-caption-0" class="nivo-html-caption">You can add captions too…</div>
+	</div>
+	
+</div>
+            
+        </div>
+                       </div>
+                </ui:insert>
+            </div>
+
+        <div class="footer">
+            <ui:insert name="footer" >
+                <ui:include src="/section/footer.xhtml" />
+            </ui:insert>
+        </div>
+    </h:body>
+</html>
+

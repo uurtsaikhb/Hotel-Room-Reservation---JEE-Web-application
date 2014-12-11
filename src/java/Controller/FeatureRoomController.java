@@ -81,6 +81,7 @@ public class FeatureRoomController implements Serializable {
 
     public String create() {
         try {
+            
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FeatureRoomCreated"));
             return prepareCreate();
