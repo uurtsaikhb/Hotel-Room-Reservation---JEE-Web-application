@@ -4,14 +4,21 @@ import Entity.Room;
 import Controller.util.JsfUtil;
 import Controller.util.PaginationHelper;
 import Model.RoomFacade;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,6 +27,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import org.primefaces.event.FileUploadEvent;
 
 @Named("roomController")
 @SessionScoped
@@ -34,6 +43,12 @@ public class RoomController implements Serializable {
     private HotelController hotelController;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    //Amar added for pictures
+    private File file;
+    private final String path = "resources" + File.separator + "uploadroom";
+    private final ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+    private String destination = servletContext.getRealPath(File.separator + path);
 
     public RoomController() {
     }
@@ -100,6 +115,7 @@ public class RoomController implements Serializable {
 
     public String create() {
         try {
+            current.setPath(path + File.separator + file.getName());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RoomCreated"));
             return prepareCreate();
@@ -249,6 +265,34 @@ public class RoomController implements Serializable {
             }
         }
 
+    }
+    
+    public void upload(FileUploadEvent event) {
+        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        try {
+            copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void copyFile(String fileName, InputStream in) {
+        try {
+            File file = new File(destination + File.separator + fileName);
+            OutputStream out = new FileOutputStream(file);
+            int read = 0;
+            byte[] bytes = new byte[1024];
+            while ((read = in.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            this.file =file;
+            in.close();
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
