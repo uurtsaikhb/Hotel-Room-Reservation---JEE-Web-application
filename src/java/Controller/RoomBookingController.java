@@ -185,7 +185,7 @@ public class RoomBookingController implements Serializable {
     public String findHotels(){
         if(getBookingController().validateDate(dateFrom, dateTo)){
         hotels=getHotelEjbFacade().findHotelByLocation(place);
-        return "/roomBooking/hotelView";
+        return "/roomBooking/hotelView?faces-redirect=true";
         }
         else
         {
@@ -197,7 +197,7 @@ public class RoomBookingController implements Serializable {
         rooms = getFacade().findAvailabileRooms(id, getDateFrom(), getDateTo());
       // rooms=getHotelEjbFacade().find(id).getRooms();
        
-     return  "/roomBooking/roomView";
+     return  "/roomBooking/roomView?faces-redirect=true";
   }
     public String addingRoom(Room room) {
         current.setRoom(room);
