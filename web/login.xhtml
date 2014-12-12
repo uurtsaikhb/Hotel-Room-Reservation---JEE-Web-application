@@ -24,10 +24,10 @@
                                 <p:password placeholder="Password" id="password" value="#{loginController.password}" title="#{bundle.CreateAccountTitle_password}" required="true"
                                             requiredMessage="Please enter your Password."/>
                                 <h:panelGroup>
-                                    <h:commandButton value="Login" action="#{loginController.login}">
+                                    <p:commandButton value="Login" action="#{loginController.login}">
                                         <f:param name="url" value="/index"/>
-                                    </h:commandButton>
-                                <h:commandButton value="Sign Up" action="/account/Create.xhtml" immediate="true" />
+                                    </p:commandButton>
+                                <p:commandButton value="Sign Up" action="/account/Create.xhtml" immediate="true" />
                                 </h:panelGroup>
                             </h:panelGrid>
                         </h:form>

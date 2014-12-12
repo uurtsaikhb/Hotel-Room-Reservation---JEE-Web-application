@@ -14,7 +14,7 @@ body.contentr
 
     font-family: Arial,sans-serif;
     background-image: none;
-    
+
 }
 .logo {
 
@@ -26,8 +26,9 @@ body.contentr
 
 }
 .hotel-list-hotel{
-    border: 4px solid #323232;
-     background-color: #B5B5B5;
+    border: 1px solid #323232;
+    background-color: #F8F8F8;
+    display: block;
 }
 .logo a
 {
@@ -92,10 +93,10 @@ ul
     position: fixed;
     background-color: white;
     bottom: 0; 
-   // right: 0;
+    // right: 0;
     width: 100%;
     /*padding-top: 10px;*/
-   // background: rgba(0,0,0,.2);
+    // background: rgba(0,0,0,.2);
 }
 #hide{
     color: darkgrey;
@@ -221,10 +222,6 @@ ul
     font-size: 8px;
     color:red;
 }
-.hotel-list-hotel {
-    position: relative;
-    font-size: smaller;
-}
 
 .hotel-list-image {
     margin: 5px;
@@ -234,6 +231,7 @@ ul
     display: inline;
     position: relative;
     z-index: 0;
+    font-size: 20px;
 }
 
 .hotel-list-description {
@@ -243,7 +241,6 @@ ul
 }
 
 .hotel-list-content {
-    height: 50px;
 }
 .ui-carousel .ui-carousel-header {
     display: none;
@@ -256,101 +253,120 @@ ul
     height: 154.167px;
 }
 .btn {
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
 }
 
 .btn:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
 }
 
 
 .myButton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #f9eca0;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #f9eca0;
-	box-shadow:inset 0px 1px 0px 0px #f9eca0;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f0c911), color-stop(1, #f2ab1e));
-	background:-moz-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
-	background:-webkit-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
-	background:-o-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
-	background:-ms-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
-	background:linear-gradient(to bottom, #f0c911 5%, #f2ab1e 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0c911', endColorstr='#f2ab1e',GradientType=0);
-	background-color:#f0c911;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #e65f44;
-	display:inline-block;
-	cursor:pointer;
-	color:#c92200;
-	font-family:arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ded17c;
+    -moz-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+    box-shadow:inset 0px 1px 0px 0px #f9eca0;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f0c911), color-stop(1, #f2ab1e));
+    background:-moz-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+    background:-webkit-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+    background:-o-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+    background:-ms-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+    background:linear-gradient(to bottom, #f0c911 5%, #f2ab1e 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0c911', endColorstr='#f2ab1e',GradientType=0);
+    background-color:#f0c911;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #e65f44;
+    display:inline-block;
+    cursor:pointer;
+    color:#c92200;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #ded17c;
 }
 .myButton:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f2ab1e), color-stop(1, #f0c911));
-	background:-moz-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
-	background:-webkit-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
-	background:-o-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
-	background:-ms-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
-	background:linear-gradient(to bottom, #f2ab1e 5%, #f0c911 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2ab1e', endColorstr='#f0c911',GradientType=0);
-	background-color:#f2ab1e;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f2ab1e), color-stop(1, #f0c911));
+    background:-moz-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+    background:-webkit-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+    background:-o-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+    background:-ms-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+    background:linear-gradient(to bottom, #f2ab1e 5%, #f0c911 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2ab1e', endColorstr='#f0c911',GradientType=0);
+    background-color:#f2ab1e;
 }
 .myButton:active {
-	position:relative;
-	top:1px;
+    position:relative;
+    top:1px;
 }
 
 .st{
     margin-left: 30px;
 
     color: blue;
-    
+
 }
 .nd{
-  
+
     margin-left:50px;
     color:blue;
 }
 .image{
-   float: right;
-padding-bottom: 10px;
-margin-right: 1px;
-margin-top: -312px;
+    float: right;
+    padding-bottom: 10px;
+    margin-right: 1px;
+    margin-top: -312px;
 }
 .review{
     float: right;
-padding-bottom: 10px;
-margin-right: 180px;
-margin-top: -310px;
+    padding-bottom: 10px;
+    margin-right: 180px;
+    margin-top: -310px;
 
-.contentr{
-    background-color: window;
-    background-image: none;
-}
-.hotelLink{
-    text-decoration: underline;
-}
+    .contentr{
+        background-color: window;
+        background-image: none;
+    }
+    .hotelLink{
+        text-decoration: underline;
+    }
+
+
+    .wrapper_hotel {
+        margin-left: 200px;
+    }
+    .content_hotel {
+        float: right;
+        width: 100%;
+        background-color: #CCF;
+    }
+    .sidebar_hotel {
+        float: left;
+        width: 200px;
+        margin-left: -200px;
+        background-color: #FFA;
+    }
+    .cleared_hotel {
+        clear: both;
+    }
