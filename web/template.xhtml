@@ -38,12 +38,21 @@
     </h:head>
 
     <h:body>
+
+        <ui:insert name="header">
+            <ui:include src="/header.xhtml" />
+        </ui:insert> 
+        
         <h1>
             <ui:insert name="title">Default Title</ui:insert>
         </h1>
         <p>
             <ui:insert name="body">Default Body</ui:insert>
         </p>
+
+        <ui:insert name="footer" >
+            <ui:include src="/footer.xhtml" />
+        </ui:insert>
     </h:body>
 
 </html>

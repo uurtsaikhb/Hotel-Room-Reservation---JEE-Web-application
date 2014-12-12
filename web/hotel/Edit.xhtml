@@ -30,8 +30,14 @@
                     <h:outputLabel value="Phone" for="phone" />
                     <h:inputText id="phone" value="#{hotelController.address.phone}" title="Phone" />
                     
+                           
+                               
                 
                 </h:panelGrid>
+                 <ui:repeat value="#{pictureController.getHotelPictures(hotelController.selected)}" var="picture" rendered="#{not empty pictureController.getHotelPictures(hotelController.selected)}">
+                                    <h:graphicImage value="../#{picture.path}" width="160" />
+                                </ui:repeat>
+                                <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty pictureController.getHotelPictures(hotelController.selected)}" /><br/><br/>
                 <h:commandLink action="#{hotelController.update}" value="#{bundle.EditHotelSaveLink}"/>
                 <br />
                 <br />
