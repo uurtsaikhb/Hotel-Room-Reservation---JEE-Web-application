@@ -16,39 +16,32 @@
                     <div class="hotel-list">
                         <div class="hotel-list-content">
                             <ui:repeat value="#{roomBookingController.hotels}" var="item">
-                                <div class="hotel-list-hotel">
-                                    <!--<h:panelGrid class="hotellist" columns="3">-->
                                 
-                                    <p:panelGrid columns="3">
-                                        <f:facet name="header">
-                                            <p:graphicImage name="/images/hotel_default.jpg" />
-                                        </f:facet>
-
-                                        <h:outputText value="Name:" /> 
-                                        <h:outputText value="#{item.name}" />
-                                          <h:outputText value="#{item.address.province}" />
-                                        <h:outputText value="State" />
-                                      
-
-                                        <h:outputText value="City" />
-                                        <h:outputText value="#{item.address.city}" />
-
-
-                                    </p:panelGrid>
-                                                                      
-                                    <div class="review">
-                                     <h:panelGrid>
-                                    <h:panelGroup>
-                                        <h:link class="hotelLink" value="#{item.name}" outcome="#{roomBookingController.findHotelById(item.id)}" />
-                                        verified customer reviews #{item.reviews.size()}<br/>
-                                        
-                                    </h:panelGroup>
-                                            </h:panelGrid>
-                                        </div>
-                                
-                                    <div class="image">
-                                    <p:commandButton class="myButton" action="#{roomBookingController.findHotelById(item.id)}" value="Select"/>
+                                <div class="wrapper_hotel">
+                                    <div class="content_hotel">Column 1 (fluid)</div>
+                                    <div class="sidebar_hotel">Column 2 (fixed)</div>
+                                    <div class="cleared_hotel"></div>
                                 </div>
+                                
+                                <div class="hotel-list-hotel">
+                                    <div class="hotel-list-image">
+                                        <p:graphicImage name="/images/hotel_default.jpg" />
+                                    </div>
+                                    <div class="hotel-list-name">
+                                        <h:link class="hotelLink" value="#{item.name}" outcome="#{roomBookingController.findHotelById(item.id)}" />
+                                    </div>
+                                    <div>
+                                        <h:outputText value="#{item.address.province}" />
+
+                                        <h:outputText value="#{item.address.city}" />
+                                    </div>
+
+                                    <div>
+                                        verified customer reviews #{item.reviews.size()}
+                                    </div>
+                                    <div>
+                                        <p:commandButton class="myButton" action="#{roomBookingController.findHotelById(item.id)}" value="Select"/>
+                                    </div>
                                 </div>
                             </ui:repeat>
                         </div>
