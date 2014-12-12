@@ -10,53 +10,49 @@
     </h:head>
     <h:body>
         <ui:composition template="/template/masterLayout.xhtml">
-
             <ui:define name="content">
                 <h:form>
                     <div class="hotel-list">
                         <div class="hotel-list-content">
                             <ui:repeat value="#{roomBookingController.hotels}" var="item">
-                                <div class="hotel-list-hotel">
-                                    <!--<h:panelGrid class="hotellist" columns="3">-->
-                                
-                                    <p:panelGrid columns="3">
-                                        <f:facet name="header">
-                                            <p:graphicImage name="/images/hotel_default.jpg" />
-                                        </f:facet>
 
-                                        <h:outputText value="Name:" /> 
-                                        <h:outputText value="#{item.name}" />
-                                          <h:outputText value="#{item.address.province}" />
-                                        <h:outputText value="State" />
-                                      
+                                <div class="hotel_list">
+                                    <div class="hotel_image">
+                                        <p:graphicImage name="/images/hotel_default.jpg" />
+                                    </div>
+                                    <div class="hotel_info">
 
-                                        <h:outputText value="City" />
-                                        <h:outputText value="#{item.address.city}" />
-
-
-                                    </p:panelGrid>
-                                                                      
-                                    <div class="review">
-                                     <h:panelGrid>
-                                    <h:panelGroup>
-                                        <h:link class="hotelLink" value="#{item.name}" outcome="#{roomBookingController.findHotelById(item.id)}" />
-                                        verified customer reviews #{item.reviews.size()}<br/>
-                                        
-                                    </h:panelGroup>
-                                            </h:panelGrid>
+                                        <span id="hotel_name">
+                                            <h:link class="hotelLink" value="#{item.name}" 
+                                                    outcome="#{roomBookingController.findHotelById(item.id)}" />
+                                        </span>
+                                        <div class="hotel_info_location">
+                                            <div class="hotel_info_address">
+                                                <h:outputText value="#{item.address.street}"/><br/>
+                                                <h:outputText value="#{item.address.city}" />,
+                                                <h:outputText value="#{item.address.province}" />,
+                                                <h:outputText value="#{item.address.zipCode}" />
+                                            </div>
                                         </div>
-                                
-                                    <div class="image">
-                                    <p:commandButton class="myButton" action="#{roomBookingController.findHotelById(item.id)}" value="Select"/>
+
+                                        <div class="hotel_info_review">
+                                            Reviews: #{item.reviews.size()}
+                                        </div>
+
+                                        <div class="hotel_info_book_button">
+                                            <p:commandButton class="myButton" 
+                                                             action="#{roomBookingController.findHotelById(item.id)}" 
+                                                             value="Select"/>
+                                        </div>
+                                    </div>
+                                    <div class="clear-both"></div>
                                 </div>
-                                </div>
+                                <hr></hr>
                             </ui:repeat>
                         </div>
                     </div>
                 </h:form>
-
             </ui:define>
-
         </ui:composition>
     </h:body>
 </html>
