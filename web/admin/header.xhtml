@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="header_content_wrapper">
+                <div class="header_content">
+                    <div class = "header_top">
+                        <div class="logo">
+                            <a href="../index.xhtml" > <h:graphicImage library="images" name="logo.jpg" /></a>
+                        </div>
+                        <div class="login">
+                            <h:form>
+                                <h:commandLink class="link" action="/account/View?faces-redirect=true" value="#{loginController.account.fname}" rendered="#{loginController.isLoggedIn}"/>
+                                <h:commandLink class="link" action="#{loginController.logout}" value="Logout" rendered="#{loginController.isLoggedIn}"/>
+                                <h:commandLink class="link" action="/login?faces-redirect=true" value="Login" rendered="#{!loginController.isLoggedIn}"/>
+                                <h:commandLink class="link" action="/account/Create?faces-redirect=true" value="Register" rendered="#{!loginController.isLoggedIn}" />
+                            </h:form>
+                        </div>
+                        <div class="menu">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                            <h:form>
+                                <p:growl id="messages"/>
+
+                    <p:menubar>
+                        <p:submenu label="Hotel" icon="ui-icon-document">
+                            <p:menuitem value="Add" url="/faces/hotel/Create.xhtml" />
+                            <p:menuitem value="List" url="/faces/hotel/List.xhtml" />
+                            <p:menuitem value="Feature" url="/faces/featureHotel/List.xhtml" />
+                        </p:submenu>
+
+                        <p:submenu label="Room" icon="ui-icon-pencil">
+                            <p:menuitem value="Add" url="/faces/room/Create.xhtml" />
+                            <p:menuitem value="List" url="/faces/room/List.xhtml" />
+                            <p:menuitem value="Feature" url="/faces/featureRoom/List.xhtml" />
+                        </p:submenu>
+
+                        <p:submenu label="Booking" icon="ui-icon-gear">
+                            <p:menuitem value="List" url="/faces/roomBooking/List.xhtml" />
+                            <p:menuitem value="Cancel" url="#" />
+                        </p:submenu>
+                    </p:menubar>
+                            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+
