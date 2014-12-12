@@ -4,16 +4,21 @@ import Entity.Hotel;
 import Controller.util.JsfUtil;
 import Controller.util.PaginationHelper;
 import Entity.Address;
-import Entity.Room;
 import Model.HotelFacade;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -22,6 +27,9 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import org.primefaces.event.FileUploadEvent;
+import Entity.Picture;
 
 @Named("hotelController")
 @SessionScoped
@@ -32,11 +40,19 @@ public class HotelController implements Serializable {
     private DataModel items = null;
     private List<Hotel> hotels;
     @EJB
-    private Model.HotelFacade ejbFacade;
+    private Model.HotelFacade ejbFacade;    
+    @EJB
+    private Model.PictureFacade ejbPictureFacade;
     @Inject
     private RoomBookingController roomBookingController;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+
+    //Amar added for pictures
+    private List<File> files = new ArrayList<>();
+    private final String path = "resources" + File.separator + "uploadhotel";
+    private final ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+    private String destination = servletContext.getRealPath(File.separator + path);
 
     public HotelController() {
     }
@@ -123,6 +139,13 @@ public class HotelController implements Serializable {
         current.setAddress(address);
         try {
             getFacade().create(current);
+                    
+            for (File file : files) {
+                Picture picture = new Picture(path + File.separator + file.getName(), current);
+                ejbPictureFacade.create(picture);
+            }
+            files.clear();
+            
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("HotelCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -273,6 +296,34 @@ public class HotelController implements Serializable {
             }
         }
 
+    }
+    
+    public void upload(FileUploadEvent event) {
+        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        try {
+            copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void copyFile(String fileName, InputStream in) {
+        try {
+            File file = new File(destination + File.separator + fileName);
+            OutputStream out = new FileOutputStream(file);
+            int read = 0;
+            byte[] bytes = new byte[1024];
+            while ((read = in.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            files.add(file);
+            in.close();
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

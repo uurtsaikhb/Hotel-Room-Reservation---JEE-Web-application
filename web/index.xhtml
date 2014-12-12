@@ -16,36 +16,36 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <div class="search-panel-wrapper">
-                <div class="search-panel">
-                    <h:form>
+            <div class="search-panel">
+            <h:form>
 
-                        <p:inputText id="place" value="#{roomBookingController.place}" pa:placeholder="City, State" size="53" style="height: 50px"/><br/>
-                        <p:outputLabel id="hide" value="Please enter you destination in City, State format" style="font-size: 12px; float: right; margin-right: 10px; font-style: italic"/><br/> 
-                        <h:panelGrid columns="2">
-                            <h:panelGroup>
-                                <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateFrom}" for="dateFrom" style="color: gray;font-size: 15px;font-style: italic"/><br/>
-                                <p:calendar id="dateFrom" value="#{roomBookingController.dateFrom}" 
-                                            title="#{bundle.CreateRoomBookingTitle_dateFrom}" pattern="MM/dd/yyyy" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT-6"/>
-                                </p:calendar>
-                            </h:panelGroup>
-                            <h:panelGroup>
-                                <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateTo}" for="dateTo" style="color: gray;font-size: 15px;font-style: italic"/><br/>
-                                <p:calendar id="dateTo" value="#{roomBookingController.dateTo}" 
-                                            title="#{bundle.CreateRoomBookingTitle_dateTo}" pattern="MM/dd/yyyy" >
-                                    <f:ajax event="change" execute="dateFrom dateTo" render="@all"></f:ajax>
-                                    <f:convertDateTime pattern="MM/dd/yyyy"  timeZone="GMT-6"/>
-                                </p:calendar>
-                            </h:panelGroup>
-                            <h:panelGroup>
-
-                                <h:outputLabel value="#{bundle.CreateRoomBookingLabel_no_of_people}" for="no_of_people" style="color: gray;font-size: 15px;font-style: italic"/>
-                                <br/>
-                                <p:inputText id="no_of_people" value="#{roomBookingController.selected.no_of_people}" title="#{bundle.CreateRoomBookingTitle_no_of_people}" size="10" style="color: gray"/>
-                            </h:panelGroup><br/>
-                        </h:panelGrid>
-                        <p:commandButton action="#{roomBookingController.findHotels}" value="Search" style="width: 450px; height: 50px"/><br/>
-                    </h:form>
+                <h:inputText id="place" value="#{roomBookingController.place}" pa:placeholder="City, State" size="64"/><br/>
+                <p:outputLabel id="hide" value="Please enter you destination in City, State format"/><br/> 
+                <h:panelGrid columns="2">
+                    <h:panelGroup>
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateFrom}" for="dateFrom" /><br/>
+                        <p:calendar id="dateFrom" value="#{roomBookingController.dateFrom}" 
+                                    title="#{bundle.CreateRoomBookingTitle_dateFrom}" pattern="MM/dd/yyyy" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT-6"/>
+                        </p:calendar>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateTo}" for="dateTo" /><br/>
+                        <p:calendar id="dateTo" value="#{roomBookingController.dateTo}" 
+                                    title="#{bundle.CreateRoomBookingTitle_dateTo}" pattern="MM/dd/yyyy" >
+                            <f:ajax event="change" execute="dateFrom dateTo" render="@all"></f:ajax>
+                            <f:convertDateTime pattern="MM/dd/yyyy"  timeZone="GMT-6"/>
+                        </p:calendar>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_no_of_people}" for="no_of_people" />
+                        <br/>
+                        <h:inputText id="no_of_people" value="#{roomBookingController.selected.no_of_people}" title="#{bundle.CreateRoomBookingTitle_no_of_people}" />
+                    </h:panelGroup><br/>
+                <h:commandButton action="#{roomBookingController.findHotels}" value="Search" /><br/>
+                </h:panelGrid>
+            </h:form>
                 </div>
             </div>
         </ui:define>
