@@ -19,18 +19,20 @@
             <div class="search-panel">
             <h:form>
 
-                <h:inputText id="place" value="#{roomBookingController.place}" pa:placeholder="City, State" size="64"/><br/>
-                <p:outputLabel id="hide" value="Please enter you destination in City, State format"/><br/> 
+                <p:inputText id="place" value="#{roomBookingController.place}" pa:placeholder="City, State" style="width: 450px; height: 50px;"/><br/>
+                <p:outputLabel id="hide" value="Please enter you destination in City, State format" style="font-size: 15px; font-style: italic; float: right; margin-right: 10px"/><br/> 
                 <h:panelGrid columns="2">
                     <h:panelGroup>
-                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateFrom}" for="dateFrom" /><br/>
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateFrom}" for="dateFrom" 
+                                       style="color: gray; font-size: 16px"/><br/>
                         <p:calendar id="dateFrom" value="#{roomBookingController.dateFrom}" 
                                     title="#{bundle.CreateRoomBookingTitle_dateFrom}" pattern="MM/dd/yyyy" >
                             <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT-6"/>
                         </p:calendar>
                     </h:panelGroup>
                     <h:panelGroup>
-                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateTo}" for="dateTo" /><br/>
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_dateTo}" for="dateTo" 
+                                       style="color: gray; font-size: 16px"/><br/>
                         <p:calendar id="dateTo" value="#{roomBookingController.dateTo}" 
                                     title="#{bundle.CreateRoomBookingTitle_dateTo}" pattern="MM/dd/yyyy" >
                             <f:ajax event="change" execute="dateFrom dateTo" render="@all"></f:ajax>
@@ -39,9 +41,12 @@
                     </h:panelGroup>
                     <h:panelGroup>
                         
-                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_no_of_people}" for="no_of_people" />
+                        <h:outputLabel value="#{bundle.CreateRoomBookingLabel_no_of_people}" for="no_of_people" 
+                                       style="color: gray; font-size: 16px"/>
                         <br/>
-                        <h:inputText id="no_of_people" value="#{roomBookingController.selected.no_of_people}" title="#{bundle.CreateRoomBookingTitle_no_of_people}" />
+                        <p:inputText id="no_of_people" value="#{roomBookingController.selected.no_of_people}" 
+                                     title="#{bundle.CreateRoomBookingTitle_no_of_people}" 
+                                     style="color: gray; width: 100px"/>
                     </h:panelGroup><br/>
                 
                 </h:panelGrid>
