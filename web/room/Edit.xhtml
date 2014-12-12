@@ -28,6 +28,10 @@
                     <h:outputLabel value="#{bundle.EditRoomLabel_price}" for="price" />
                     <h:inputText id="price" value="#{roomController.selected.price}" title="#{bundle.EditRoomTitle_price}" />
                 </h:panelGrid>
+                
+                
+                                    <h:graphicImage value="../#{roomController.selected.path}" width="160" />
+                                <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty roomController.selected.path}" /><br/><br/>
                 <h:commandLink action="#{roomController.update}" value="#{bundle.EditRoomSaveLink}"/>
                 <br />
                 <br />
