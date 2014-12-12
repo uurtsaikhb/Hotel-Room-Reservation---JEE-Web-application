@@ -27,6 +27,8 @@
                     <h:outputText value="#{roomController.selected.price}" title="#{bundle.ViewRoomTitle_price}"/>
                 </h:panelGrid>
                 <br />
+                                    <h:graphicImage value="../#{roomController.selected.path}" width="160" />
+                                <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty roomController.selected.path}" /><br/><br/>
                 <h:commandLink action="#{roomController.destroyAndView}" value="#{bundle.ViewRoomDestroyLink}"/>
                 <br />
                 <br />
