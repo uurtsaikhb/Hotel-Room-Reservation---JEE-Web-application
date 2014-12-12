@@ -43,8 +43,9 @@
                         <br/>
                         <h:inputText id="no_of_people" value="#{roomBookingController.selected.no_of_people}" title="#{bundle.CreateRoomBookingTitle_no_of_people}" />
                     </h:panelGroup><br/>
-                <h:commandButton action="#{roomBookingController.findHotels}" value="Search" /><br/>
+                
                 </h:panelGrid>
+                <p:commandButton action="#{roomBookingController.findHotels}" value="Search" style="width: 450px; height: 50px;"/><br/>
             </h:form>
                 </div>
             </div>
