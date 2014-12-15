@@ -7,56 +7,64 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>List of Hotels</title>
-        
+
     </h:head>
     <h:body>
         <ui:composition template="/template/masterLayout.xhtml">
-            <ui:define name="header" >
-
-                <p:carousel autoPlayInterval="10000" numVisible="1"
-                            effect="easeInStrong" circular="true" vertical="true" itemStyleClass="photo">
-                    <f:facet name="header">
-
-                    </f:facet>      
-                    <p:tab title="">
-                        <p:graphicImage  height="153.167px" width="1592px" name="images/roomImg.jpg" />
-                    </p:tab>
-                    <p:tab title="">
-                        <p:graphicImage  height="153.167px" width="1592px" name="images/roomImg.jpg" />
-                    </p:tab>
-                </p:carousel>
-
-            </ui:define>
             <ui:define name="content">
                 <h:form>
-                    <div class="hotel-list">
-                        <div class="hotel-list-content">
-                            <ui:repeat value="#{roomBookingController.rooms}" var="item">
-                                <div class="hotel-list-hotel">
-                                    <h:panelGrid class="hotellist" columns="4">
-                                        <h:panelGroup> 
-                                            #{item.type}<br/>
-                                            future will be here<br/>
-                                            <div class="hotel-list-image">
-                                                <h:graphicImage library="images" name="roomImg.jpg" width="160"/>
-                                            </div>
-                                        </h:panelGroup>
-                                        <h:panelGroup>
-                                            #{item.max}<br/>
-                                        </h:panelGroup>
-                                        USD #{item.price}
-                                        <h:commandButton action="#{roomBookingController.addingRoom(item)}" value="Book"/>
-                                    </h:panelGrid>
-                                </div>
-                            </ui:repeat>
-                        </div>
-                    </div>
+                    <table width="100%" style="background-color: white; border-collapse: collapse;" class="room_list" >
+                        <col width="220px"/>
+                        <col width="150px"/>
+                        <col width="100px"/>
+                        <col width="100px"/>
+                        <col width="100px"/>
+
+                        <thead>
+                            <tr>
+                                <th>Picture</th>
+                                <th>Room type</th>
+                                <th>Price</th>
+                                <th>Max</th>
+                                <th>Total price</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <ui:repeat value="#{roomBookingController.rooms}" var="item">
+                            <tr>
+                                <td>
+                                    <h:graphicImage library="images" name="roomImg.jpg" width="160"/>
+                                </td>
+                                <td>
+                                    #{item.type}
+                                </td>
+                                <td>
+                                    #{item.price}
+                                </td>
+                                <td>
+                                    <h:selectOneMenu id="subscriptions" value="#{item.max}">
+                                        <f:selectItem id="item1"  itemValue="1" />
+                                        <f:selectItem id="item2"  itemValue="2" />
+                                        <f:selectItem id="item3"  itemValue="3" />
+                                        <f:selectItem id="item4"  itemValue="4" />
+                                        <f:selectItem id="item5"  itemValue="5" />
+                                        <f:ajax render="maxId"/>
+                                    </h:selectOneMenu>
+                                </td>
+                                <td>
+                                    <h:outputText id="maxId" value="#{item.price * item.max}"/>
+                                </td>
+                                <td>
+                                    <p:commandButton class="myButton" action="#{roomBookingController.addingRoom(item)}" value="Book"/>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
                 </h:form>
 
             </ui:define>
-           
+
         </ui:composition>
     </h:body>
 </html>
 
-    

@@ -57,3 +57,14 @@ and open the template in the editor.
     font-style: italic;
     color: gray;
 }
+
+.room_list td, th{
+    border: 1px solid gray;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.room_list thead {
+    background-color: #DEDEDE;
+    border: 1px solid gray;
+}

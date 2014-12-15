@@ -52,6 +52,8 @@ public class RoomBookingController implements Serializable {
     private LoginController loginController;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    private String numberofroom;
 
     public RoomBookingController() {
     }
@@ -333,6 +335,14 @@ public class RoomBookingController implements Serializable {
 
     public RoomBooking getRoomBooking(java.lang.Long id) {
         return ejbFacade.find(id);
+    }
+
+    public String getNumberofroom() {
+        return numberofroom;
+    }
+
+    public void setNumberofroom(String numberofroom) {
+        this.numberofroom = numberofroom;
     }
 
     @FacesConverter(forClass = RoomBooking.class)

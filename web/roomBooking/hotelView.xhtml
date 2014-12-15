@@ -23,8 +23,8 @@
                                     <div class="hotel_info">
 
                                         <span id="hotel_name">
-                                            <h:link class="hotelLink" value="#{item.name}" 
-                                                    outcome="#{roomBookingController.findHotelById(item.id)}" />
+                                            <h:commandLink class="hotelLink" value="#{item.name}" 
+                                                    action="#{roomBookingController.findHotelById(item.id)}" />
                                         </span>
                                         <div class="hotel_info_location">
                                             <div class="hotel_info_address">
