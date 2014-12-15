@@ -171,12 +171,30 @@ ul
     padding: 25px 20px 20px;
     width: 507px;
 }
+
+.search-panel-admin {
+    background: none repeat scroll 0 0 #fff;
+    border: 3px solid #fff;
+    border-radius: 10px;
+    margin: 0;
+    padding: 25px 20px 20px;
+    width: 807px;
+}
 #hide{
     color: red;
 }
 
 .search-panel-wrapper {
     width: 523px;
+    padding: 8px;
+    margin: 0 auto;
+    margin-top: 50px;
+    background: rgba(0,0,0,.2);
+    border-radius: 10px;
+}
+
+.search-panel-wrapper-admin {
+    width: 823px;
     padding: 8px;
     margin: 0 auto;
     margin-top: 50px;

@@ -27,27 +27,35 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div>            
                             <h:form>
                                 <p:growl id="messages"/>
-
                     <p:menubar>
                         <p:submenu label="Hotel" icon="ui-icon-document">
                             <p:menuitem value="Add" url="/faces/hotel/Create.xhtml" />
-                            <p:menuitem value="List" url="/faces/hotel/List.xhtml" />
+                            <p:menuitem value="View" url="/faces/hotel/List.xhtml" />
                             <p:menuitem value="Feature" url="/faces/featureHotel/List.xhtml" />
                         </p:submenu>
 
                         <p:submenu label="Room" icon="ui-icon-pencil">
                             <p:menuitem value="Add" url="/faces/room/Create.xhtml" />
-                            <p:menuitem value="List" url="/faces/room/List.xhtml" />
+                            <p:menuitem value="View" url="/faces/room/List.xhtml" />
                             <p:menuitem value="Feature" url="/faces/featureRoom/List.xhtml" />
                         </p:submenu>
 
                         <p:submenu label="Booking" icon="ui-icon-gear">
                             <p:menuitem value="List" url="/faces/roomBooking/List.xhtml" />
                             <p:menuitem value="Cancel" url="#" />
+                        </p:submenu>
+                        
+                        <p:submenu label="Customer" icon="ui-icon-disk">
+                            <p:menuitem value="Add" url="/faces/customer/Create.xhtml" />
+                            <p:menuitem value="View" url="/faces/customer/List.xhtml" />
+                        </p:submenu>
+                        
+                        <p:submenu label="Admin" icon="ui-icon-arrowrefresh-1-w">
+                            <p:menuitem value="Add" url="/faces/administrator/Create.xhtml" />
+                            <p:menuitem value="View" url="/faces/administrator/List.xhtml" />
                         </p:submenu>
                     </p:menubar>
                             </h:form>
