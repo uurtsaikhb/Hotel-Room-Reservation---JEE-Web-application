@@ -205,10 +205,10 @@ public class RoomBookingController implements Serializable {
         current.setRoom(room);
         account=loginController.getAccount();
         if(account!=null){
-            return "/roomBooking/payment";
+            return "/roomBooking/payment?faces-redirect=true";
         }
         else{
-            return "/roomBooking/Form";
+            return "/roomBooking/Form?faces-redirect=true";
         }
         
     }

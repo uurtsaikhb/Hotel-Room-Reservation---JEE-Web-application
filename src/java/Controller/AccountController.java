@@ -86,7 +86,7 @@ public class AccountController implements Serializable {
         current = new Account();
         address=new Address();
         selectedItemIndex = -1;
-        return "/login";
+        return "/login.xhtml?faces-redirect=true";
     }
     public boolean accountExist(String email) {
         Account accountByEmail=null;
@@ -106,12 +106,10 @@ public class AccountController implements Serializable {
             return prepareCreate();
             }
             else{
-             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("emailExist"));
-            return null;
+            return "/login.xhtml?faces-redirect=true";
             }
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+            return "/login.xhtml?faces-redirect=true";
         }
     }
 

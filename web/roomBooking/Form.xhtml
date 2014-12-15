@@ -6,37 +6,40 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-  <ui:composition template="/template/masterLayout.xhtml">
+    <ui:composition template="/template/masterLayout.xhtml">
         <ui:define name="title">
             <h:outputText value="Please enter your detail below"></h:outputText>
         </ui:define>
-         <ui:define name="content">
+        <ui:define name="content">
             <div class="search-panel-wrapper">
-                    <div class="search-panel">
-                        <h3>Register</h3>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:commandLink action="#{loginController.checkLogin}" immediate="true" rendererType="#{!loginController.isLoggedIn}">Members login 
-                    <f:param name="url" value="roomBooking/payment"/>
-            </h:commandLink>  
-                 <h:panelGrid columns="1">
-                                <p:inputText id="fname" value="#{roomBookingController.account.fname}" placeholder="First name" />
-                                <p:inputText id="lname" value="#{roomBookingController.account.lname}" placeholder="Last name" />
-                                <p:password id="password" value="#{roomBookingController.account.password}" placeholder="Password" />
-                                <p:inputText id="email" value="#{roomBookingController.account.email}" placeholder="Email" size="32"/>
-                                <p:inputText id="street" value="#{roomBookingController.account.address.street}" placeholder="Street" size="32"/>
-                                <p:inputText id="city" value="#{roomBookingController.account.address.city}" placeholder="City" />
-                                <p:inputText id="state" value="#{roomBookingController.account.address.province}" placeholder="State" />
-                                <p:inputText id="zipCode" value="#{roomBookingController.account.address.zipCode}" placeholder="Zip" />
-                                <p:inputText id="phone" value="#{roomBookingController.account.address.phone}" placeholder="Phone" />
-                                <h:commandButton value="Submit" action="#{roomBookingController.createAccount}"/>
-                 </h:panelGrid>
-                
+                <div class="search-panel">
+                    <h:form>
+                        <hr/>
+                        <h:commandLink style="color:red; text-align: right" action="#{loginController.checkLogin}" immediate="true" rendererType="#{!loginController.isLoggedIn}">LOGIN 
+                            <f:param name="url" value="roomBooking/payment?faces-redirect=true"/>
+                        </h:commandLink> 
+                        <hr/>
+                        <h3>NEW USER</h3>
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
 
-            </h:form>
-                    </div>
+                        <h:panelGrid columns="1">
+                            <p:inputText id="fname" value="#{roomBookingController.account.fname}" placeholder="First name" />
+                            <p:inputText id="lname" value="#{roomBookingController.account.lname}" placeholder="Last name" />
+                            <p:password id="password" value="#{roomBookingController.account.password}" placeholder="Password" />
+                            <p:inputText id="email" value="#{roomBookingController.account.email}" placeholder="Email" size="32"/>
+                            <p:inputText id="street" value="#{roomBookingController.account.address.street}" placeholder="Street" size="32"/>
+                            <p:inputText id="city" value="#{roomBookingController.account.address.city}" placeholder="City" />
+                            <p:inputText id="state" value="#{roomBookingController.account.address.province}" placeholder="State" />
+                            <p:inputText id="zipCode" value="#{roomBookingController.account.address.zipCode}" placeholder="Zip" />
+                            <p:inputText id="phone" value="#{roomBookingController.account.address.phone}" placeholder="Phone" />
+                            <p:commandButton value="Submit" action="#{roomBookingController.createAccount}"/>
+                        </h:panelGrid>
+
+
+                    </h:form>
+                </div>
             </div>
         </ui:define>
     </ui:composition>
