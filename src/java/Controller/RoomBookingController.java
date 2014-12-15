@@ -37,8 +37,13 @@ public class RoomBookingController implements Serializable {
     private List<Hotel> hotels;
     private Account account;
     private List<Room> rooms;
+    private Hotel hotel;
     private DataModel items = null;
     private String place;
+
+    public Hotel getHotel() {
+        return hotel;
+    }
     @EJB 
     private Model.HotelFacade hotelEjbFacade;
     @EJB
@@ -197,6 +202,7 @@ public class RoomBookingController implements Serializable {
     }
      public String findHotelById(Long id){
         rooms = getFacade().findAvailabileRooms(id, getDateFrom(), getDateTo());
+        hotel = hotelEjbFacade.find(id);
       // rooms=getHotelEjbFacade().find(id).getRooms();
        
      return  "/roomBooking/roomView?faces-redirect=true";

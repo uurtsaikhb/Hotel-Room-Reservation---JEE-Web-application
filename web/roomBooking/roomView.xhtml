@@ -12,7 +12,11 @@
     <h:body>
         <ui:composition template="/template/masterLayout.xhtml">
             <ui:define name="content">
-                <h:form>
+                <h:form><center>
+                        <p:galleria value="#{pictureController.getHotelPictures(roomBookingController.hotel)}" var="image" panelWidth="780" showCaption="false">
+                            <p:graphicImage value="../#{image.path}" alt="Image Description for #{image.path}" title="#{image}"/>
+                    </p:galleria>
+                </center>
                     <table width="100%" style="background-color: white; border-collapse: collapse;" class="room_list" >
                         <col width="220px"/>
                         <col width="150px"/>

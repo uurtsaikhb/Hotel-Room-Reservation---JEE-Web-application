@@ -30,6 +30,7 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import org.primefaces.event.FileUploadEvent;
 import Entity.Picture;
+import javax.interceptor.Interceptors;
 
 @Named("hotelController")
 @SessionScoped
@@ -134,7 +135,7 @@ public class HotelController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
-
+@Interceptors(Logging.class)
     public String create() {
         current.setAddress(address);
         try {

@@ -6,6 +6,7 @@
 
 package Controller;
 
+import java.io.Serializable;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -15,7 +16,7 @@ import javax.interceptor.InvocationContext;
  * @author gizachew
  */
 @Interceptor
-public class Logging {
+public class Logging implements Serializable{
     
     @AroundInvoke
     public Object log(InvocationContext ic) throws Exception
