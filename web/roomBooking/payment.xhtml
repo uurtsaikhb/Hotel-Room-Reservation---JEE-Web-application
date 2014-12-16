@@ -4,7 +4,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
@@ -15,9 +14,6 @@
             <div style="width: 100%; text-align: center; font-size: 35px; color: #58A7CA; padding-bottom: 20px">
                 Your payment information. 
             </div>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" />
-            </h:panelGroup>
             <h:form> 
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Card type: " for="cardType"/>
@@ -62,9 +58,11 @@
                         <f:selectItem itemValue="2020" itemLabel="2020" />
                     </p:selectOneMenu>
                 </h:panelGrid>
-                <p:commandButton value="Check card"  action="#{bankWS.prepareCheckCard}"/>
-                <p:commandButton value="Pay" action="#{roomBookingController.create}"/>
-
+                <div style="width: 100%; text-align: center">
+                    <h:commandButton id="checkbutton_id" value="Pay"  action="#{bankWS.prepareCheckCard}" 
+                                     style="color: red; font-size: 16px; height: 40px; width: 120px; text-align: center"/>
+                </div>
+                <h:message for="j_idt85:checkbutton_id" />
 
             </h:form>
         </ui:define>

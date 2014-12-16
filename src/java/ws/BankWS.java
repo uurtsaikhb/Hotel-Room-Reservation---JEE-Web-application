@@ -47,11 +47,11 @@ public class BankWS {
         System.out.println("Check card");
         if (checkCard(cardType, cardNumber, securityNumber, expdateMonth, expdateYear)){
             System.out.println("card number is correct");
-            return "Confirmation";
+            return "Confirmation?faces-redirect=true";
         } else {
             System.out.println("card number is incorrect !!!");
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Card information", "Card number is wrong !"));
-            JsfUtil.addErrorMessage("Card number is wrong !");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Card number is incorrect !"));
             return null;
         }
         
