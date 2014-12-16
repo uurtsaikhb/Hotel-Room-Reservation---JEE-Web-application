@@ -11,5 +11,4 @@
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="hrjndi" object-type="user" pool-name="mysql_hotelreservation_rootPool"/>
-    <jdbc-resource enabled="true" jndi-name="bela" object-type="user" pool-name="mysql_hotelreservation_rootPool"/>
 </resources>
