@@ -14,7 +14,7 @@
             <ui:define name="content">
                 <h:form><center>
                         <p:galleria value="#{pictureController.getHotelPictures(roomBookingController.hotel)}" var="image" panelWidth="780" showCaption="false">
-                            <p:graphicImage value="../#{image.path}" alt="Image Description for #{image.path}" title="#{image}"/>
+                            <p:graphicImage value="../#{image.path}"/>
                     </p:galleria>
                 </center>
                     <table width="100%" style="background-color: white; border-collapse: collapse;" class="room_list" >

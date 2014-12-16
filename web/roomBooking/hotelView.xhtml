@@ -18,13 +18,17 @@
 
                                 <div class="hotel_list">
                                     <div class="hotel_image">
-                                        <p:graphicImage name="/images/hotel_default.jpg" />
+
+                                        <ui:repeat value="#{pictureController.getHotelPictures(item)}" var="picture" rendered="#{not empty pictureController.getHotelPictures(item)}" size="1">
+                                            <h:graphicImage value="../#{picture.path}" width="300" />
+                                        </ui:repeat>
+                                        <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty pictureController.getHotelPictures(item)}" />
                                     </div>
                                     <div class="hotel_info">
 
                                         <span id="hotel_name">
                                             <h:commandLink class="hotelLink" value="#{item.name}" 
-                                                    action="#{roomBookingController.findHotelById(item.id)}" />
+                                                           action="#{roomBookingController.findHotelById(item.id)}" />
                                         </span>
                                         <div class="hotel_info_location">
                                             <div class="hotel_info_address">
