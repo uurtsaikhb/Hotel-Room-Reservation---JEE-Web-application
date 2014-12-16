@@ -15,8 +15,8 @@
                 <h:form><center>
                         <p:galleria value="#{pictureController.getHotelPictures(roomBookingController.hotel)}" var="image" panelWidth="780" showCaption="false">
                             <p:graphicImage value="../#{image.path}"/>
-                    </p:galleria>
-                </center>
+                        </p:galleria>
+                    </center>
                     <table width="100%" style="background-color: white; border-collapse: collapse;" class="room_list" >
                         <col width="220px"/>
                         <col width="150px"/>
@@ -37,7 +37,8 @@
                         <ui:repeat value="#{roomBookingController.rooms}" var="item">
                             <tr>
                                 <td>
-                                    <h:graphicImage library="images" name="roomImg.jpg" width="160"/>
+                                    <h:graphicImage value="../#{item.path}" width="160" />
+                                    <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty item.path}" />
                                 </td>
                                 <td>
                                     #{item.type}
