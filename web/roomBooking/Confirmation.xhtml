@@ -7,38 +7,73 @@
 
     <ui:composition template="/template/masterLayout.xhtml">
         <ui:define name="title">
-            Confirmation 
+            PAYMENT CONFIRMATION
         </ui:define>
 
         <ui:define name="content">
 
             <div class="search-panel-wrapper">
                 <div class="search-panel">
-                    Confirmation
-            <br/>
-            Confirmed
-                    <h:form>
-                        <h:panelGrid  id="hotelinfo" columns="1">
-                            <h:outputLabel id="hotelName" value="#{roomBookingController.selected.room.hotel.name}"/>
-                            <h:outputLabel id="hotelAddressCity" value="#{roomBookingController.selected.room.hotel.address.city}"/>
-                            <h:outputLabel id="hotelAddressState" value="#{roomBookingController.selected.room.hotel.address.province}"/>
-                        </h:panelGrid>
-                        <h:panelGrid columns="2">
-                            <h:outputLabel for="checkin" value="Check in:"/>
-                            <h:outputLabel id="checkin" value="#{roomBookingController.selected.dateFrom}">
-                                <f:convertDateTime dateStyle="full" timeZone="EST" type="date"/>
-                            </h:outputLabel>
-                            <h:outputLabel for="checkout" value="Check out:"/>
-                            <h:outputLabel id="checkout" value="#{roomBookingController.selected.dateTo}">
-                                <f:convertDateTime dateStyle="full" timeZone="EST" type="date"/>
-                            </h:outputLabel>
-                            <h:outputLabel for="totalNum" value="Total rooms:"/>
-                            <h:outputLabel id="totalNum" value="1"/>
-                            <h:outputLabel for="roomType" value="Room type:"/>
-                            <h:outputLabel id="roomType" value="#{roomBookingController.selected.room.type}"/>
+                    <div style="color: #57106B; text-align: left; font-size: 20px">
+                        <span style="font-weight: bold">hotel</span> confirmation
+                    </div>
+                    <span style="color: #EA7412">thank you for your booking</span>
+                    <pre style="color: #555555">You will receive a booking confirmation email shortly. </pre>
+                    <hr/>
+                    <span style="color: #EA7412">booking summary</span>
 
-                        </h:panelGrid>
-                    </h:form>
+                    <table>
+                        <tr>
+                            <td>
+                                <pre style="font-size: 13px;color: #555555">Hotel</pre>
+                            </td>
+                            <td>
+                                <pre style="font-size: 13px; font-weight: bold">#{roomBookingController.selected.room.hotel.name}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre style="font-size: 13px; color: #555555">Destination</pre>
+                            </td>
+                            <td>
+                                <pre style="font-size: 13px; font-weight: bold">#{roomBookingController.selected.room.hotel.address.city}, #{roomBookingController.selected.room.hotel.address.province}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre style="font-size: 13px; color: #555555">check-in</pre>
+                            </td>
+                            <td>
+                                <pre style="font-size: 13px; font-weight: bold">
+                                <h:outputLabel id="checkin" value="#{roomBookingController.selected.dateFrom}">
+                                    <f:convertDateTime dateStyle="full" timeZone="EST" type="date"/>
+                                </h:outputLabel>
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre style="font-size: 13px; color: #555555">check-out</pre>
+                            </td>
+                            <td>
+                                <pre style="font-size: 13px; font-weight: bold">
+                                    <h:outputLabel id="checkout" value="#{roomBookingController.selected.dateTo}">
+                                    <f:convertDateTime dateStyle="full" timeZone="EST" type="date"/>
+                                    </h:outputLabel>
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre style="font-size: 13px; color: #555555">Room</pre>
+                            </td>
+                            <td>
+                                <pre style="font-size: 13px; font-weight: bold">
+                                <h:outputLabel id="roomType" value="#{roomBookingController.selected.room.type}"/>
+                                </pre>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </ui:define>
