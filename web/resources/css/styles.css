@@ -298,7 +298,7 @@ ul
 }
 
 
-.myButton {
+#myButton {
     -moz-box-shadow:inset 0px 1px 0px 0px #f9eca0;
     -webkit-box-shadow:inset 0px 1px 0px 0px #f9eca0;
     box-shadow:inset 0px 1px 0px 0px #f9eca0;
@@ -366,7 +366,7 @@ ul
         background-color: window;
         background-image: none;
     }
-    .hotelLink{
+    #hotelLink{
         text-decoration: underline;
         color:#4BC6F8;
     }

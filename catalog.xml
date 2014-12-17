@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/BankWebservice/BankWebService?wsdl" uri="src/conf/xml-resources/web-service-references/BankWebService/wsdl/localhost_8080/BankWebservice/BankWebService.wsdl"/>
     <system systemId="http://localhost:8080/BankWebservice/BankWebService?xsd=1" uri="src/conf/xml-resources/web-service-references/BankWebService/wsdl/localhost_8080/BankWebservice/BankWebService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/webservice/BankWebService?wsdl" uri="src/conf/xml-resources/web-service-references/BankWebService/wsdl/localhost_8080/webservice/BankWebService.wsdl"/>
+    <system systemId="http://localhost:8080/webservice/BankWebService?xsd=1" uri="src/conf/xml-resources/web-service-references/BankWebService/wsdl/localhost_8080/webservice/BankWebService.xsd_1.xsd"/>
 </catalog>

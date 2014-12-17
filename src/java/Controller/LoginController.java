@@ -122,7 +122,7 @@ public class LoginController implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         isLoggedIn = false;
         JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("signin"));
-        return "/index";
+        return "/login";
     }
 
 }

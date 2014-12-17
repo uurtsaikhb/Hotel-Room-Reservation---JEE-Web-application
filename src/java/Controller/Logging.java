@@ -15,21 +15,21 @@ import javax.interceptor.InvocationContext;
  *
  * @author gizachew
  */
-@Interceptor
+//@Interceptor
 public class Logging implements Serializable{
     
-    @AroundInvoke
-    public Object log(InvocationContext ic) throws Exception
-    {
-        System.out.println("Admin interceptor started :"+ic.getTarget().getClass().getSimpleName()+"__"+ic.getMethod().getName());
-        try{
-            return ic.proceed();       
-        }
-        finally {
-                    System.out.println("Admin interceptor Endeed :"+ic.getTarget().getClass().getSimpleName()+"__"+ic.getMethod().getName());
-
-        }
-    }
-    
+//    @AroundInvoke
+//    public Object log(InvocationContext ic) throws Exception
+//    {
+//        System.out.println("Admin interceptor started :"+ic.getTarget().getClass().getSimpleName()+"__"+ic.getMethod().getName());
+//        try{
+//            return ic.proceed();       
+//        }
+//        finally {
+//                    System.out.println("Admin interceptor Endeed :"+ic.getTarget().getClass().getSimpleName()+"__"+ic.getMethod().getName());
+//
+//        }
+//    }
+//    
     
 }

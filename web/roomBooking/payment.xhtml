@@ -6,65 +6,68 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/template/masterLayout.xhtml">
         <ui:define name="title">
             <h:outputText value="Please enter your detail below"></h:outputText>
         </ui:define>
-        <ui:define name="body">
-            <div style="width: 100%; text-align: center; font-size: 35px; color: #58A7CA; padding-bottom: 20px">
-                Your payment information. 
-            </div>
-            <h:form> 
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Card type: " for="cardType"/>
-                    <p:selectOneMenu  value="#{bankWS.cardType}">
-                        <f:selectItem itemValue="american" itemLabel="American Express" />  
-                        <f:selectItem itemValue="dinner" itemLabel="Dinner's Club" />  
-                        <f:selectItem itemValue="discover" itemLabel="Discover" />  
-                        <f:selectItem itemValue="master" itemLabel="Master Card" />  
-                        <f:selectItem itemValue="visa" itemLabel="Visa" />
-                    </p:selectOneMenu>
+        <ui:define name="content">
+            <div class="search-panel-wrapper-admin">
+                <div class="search-panel-admin">
+                    <div style="width: 100%; text-align: center; font-size: 35px; color: #58A7CA; padding-bottom: 20px">
+                        Your payment information. 
+                    </div>
+                    <h:form> 
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Card type: " for="cardType"/>
+                            <p:selectOneMenu  value="#{bankWS.cardType}">
+                                <f:selectItem itemValue="american" itemLabel="American Express" />  
+                                <f:selectItem itemValue="dinner" itemLabel="Dinner's Club" />  
+                                <f:selectItem itemValue="discover" itemLabel="Discover" />  
+                                <f:selectItem itemValue="master" itemLabel="Master Card" />  
+                                <f:selectItem itemValue="visa" itemLabel="Visa" />
+                            </p:selectOneMenu>
 
-                    Card Number:
-                    <p:inputText size="32" value="#{bankWS.cardNumber}"></p:inputText>
+                            Card Number:
+                            <p:inputText size="32" value="#{bankWS.cardNumber}"></p:inputText>
 
-                    Security Code:
-                    <p:inputText size="10" value = "#{bankWS.securityNumber}"></p:inputText>
+                            Security Code:
+                            <p:inputText size="10" value = "#{bankWS.securityNumber}"></p:inputText>
 
-                </h:panelGrid>
-                <h:panelGrid columns="3">
-                    Expiration date:
-                    <p:selectOneMenu value="#{bankWS.expdateMonth}">
-                        <f:selectItem itemValue="1" itemLabel="Jan" />  
-                        <f:selectItem itemValue="2" itemLabel="Feb" />  
-                        <f:selectItem itemValue="3" itemLabel="Mar" />  
-                        <f:selectItem itemValue="4" itemLabel="Apr" />  
-                        <f:selectItem itemValue="5" itemLabel="May" />
-                        <f:selectItem itemValue="6" itemLabel="Jun" />
-                        <f:selectItem itemValue="7" itemLabel="Jul" />
-                        <f:selectItem itemValue="8" itemLabel="Aug" />
-                        <f:selectItem itemValue="9" itemLabel="Sep" />
-                        <f:selectItem itemValue="10" itemLabel="Oct" />
-                        <f:selectItem itemValue="11" itemLabel="Nov" />
-                        <f:selectItem itemValue="12" itemLabel="Dec" />
-                    </p:selectOneMenu>
-                    <p:selectOneMenu value="#{bankWS.expdateYear}">
-                        <f:selectItem itemValue="2014" itemLabel="2014" />
-                        <f:selectItem itemValue="2015" itemLabel="2015" />
-                        <f:selectItem itemValue="2016" itemLabel="2016" />
-                        <f:selectItem itemValue="2017" itemLabel="2017" />
-                        <f:selectItem itemValue="2018" itemLabel="2018" />
-                        <f:selectItem itemValue="2019" itemLabel="2019" />
-                        <f:selectItem itemValue="2020" itemLabel="2020" />
-                    </p:selectOneMenu>
-                </h:panelGrid>
-                <div style="width: 100%; text-align: center">
-                    <h:commandButton id="checkbutton_id" value="Pay"  action="#{bankWS.prepareCheckCard}" 
-                                     style="color: red; font-size: 16px; height: 40px; width: 120px; text-align: center"/>
-                </div>
-                <h:message for="j_idt85:checkbutton_id" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="3">
+                            Expiration date:
+                            <p:selectOneMenu value="#{bankWS.expdateMonth}">
+                                <f:selectItem itemValue="1" itemLabel="Jan" />  
+                                <f:selectItem itemValue="2" itemLabel="Feb" />  
+                                <f:selectItem itemValue="3" itemLabel="Mar" />  
+                                <f:selectItem itemValue="4" itemLabel="Apr" />  
+                                <f:selectItem itemValue="5" itemLabel="May" />
+                                <f:selectItem itemValue="6" itemLabel="Jun" />
+                                <f:selectItem itemValue="7" itemLabel="Jul" />
+                                <f:selectItem itemValue="8" itemLabel="Aug" />
+                                <f:selectItem itemValue="9" itemLabel="Sep" />
+                                <f:selectItem itemValue="10" itemLabel="Oct" />
+                                <f:selectItem itemValue="11" itemLabel="Nov" />
+                                <f:selectItem itemValue="12" itemLabel="Dec" />
+                            </p:selectOneMenu>
+                            <p:selectOneMenu value="#{bankWS.expdateYear}">
+                                <f:selectItem itemValue="2014" itemLabel="2014" />
+                                <f:selectItem itemValue="2015" itemLabel="2015" />
+                                <f:selectItem itemValue="2016" itemLabel="2016" />
+                                <f:selectItem itemValue="2017" itemLabel="2017" />
+                                <f:selectItem itemValue="2018" itemLabel="2018" />
+                                <f:selectItem itemValue="2019" itemLabel="2019" />
+                                <f:selectItem itemValue="2020" itemLabel="2020" />
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        <div style="width: 100%; text-align: center">
+                            <h:commandButton id="checkbutton_id" value="Pay"  action="#{bankWS.prepareCheckCard}" 
+                                             style="color: red; font-size: 16px; height: 40px; width: 120px; text-align: center"/>
+                        </div>
+                        <h:message for="j_idt85:checkbutton_id" />
 
-            </h:form>
+                    </h:form>
+                </div></div>
         </ui:define>
     </ui:composition>
 
