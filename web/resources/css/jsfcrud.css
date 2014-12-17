@@ -46,7 +46,7 @@ form.jsfcrud_list_form th, td th {
 
 td {
     vertical-align: top;
-    padding-bottom: 8px;
+    padding-bottom: 0px;
     font-size: large;
 }
 
