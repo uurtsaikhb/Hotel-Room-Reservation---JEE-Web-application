@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -26,6 +27,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import ws.BankWS;
 
 @Named("roomBookingController")
 @SessionScoped
@@ -52,7 +54,8 @@ public class RoomBookingController implements Serializable {
     private BookingController bookingController;
     @EJB
     private RoomFacade roomFacade;
-   
+    @Inject
+    private BankWS bankWS;
     @Inject
     private LoginController loginController;
     private PaginationHelper pagination;
@@ -74,6 +77,10 @@ public class RoomBookingController implements Serializable {
             account = new Account();
         }
         return account;
+    }
+
+    public BankWS getBankWS() {
+        return bankWS;
     }
     
 
@@ -232,13 +239,23 @@ public class RoomBookingController implements Serializable {
         
         try {
             
+            if(getBankWS().prepareCheckCard()){
+                current.setConfirmation(getBookingController().generateNumber());
             getBookingController().createBooking(current);
             
             return "/roomBooking/Confirmation";
+            }
+            else 
+        {
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Card number is incorrect !"));
+            return null;
+        }
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+        
+        
     }
 
     public String prepareEdit() {

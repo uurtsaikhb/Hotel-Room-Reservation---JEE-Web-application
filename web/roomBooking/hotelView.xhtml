@@ -27,7 +27,7 @@
                                     <div class="hotel_info">
 
                                         <span id="hotel_name">
-                                            <h:commandLink class="hotelLink" value="#{item.name}" 
+                                            <h:commandLink id="hotelLink" value="#{item.name}" 
                                                            action="#{roomBookingController.findHotelById(item.id)}" />
                                         </span>
                                         <div class="hotel_info_location">
@@ -44,7 +44,7 @@
                                         </div>
 
                                         <div class="hotel_info_book_button">
-                                            <p:commandButton class="myButton" 
+                                            <p:commandButton id="myButton" 
                                                              action="#{roomBookingController.findHotelById(item.id)}" 
                                                              value="Select"/>
                                         </div>

@@ -12,11 +12,12 @@
             <h:outputText value="#{bundle.CreateRoomBookingTitle}"></h:outputText>
         </ui:define>
         <ui:define name="content">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
+          
             <div class="search-panel-wrapper">
             <div class="search-panel">
+                  <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
             <h:form>
 
                 <p:inputText id="place" value="#{roomBookingController.place}" pa:placeholder="City, State" style="width: 450px; height: 50px;"/><br/>
@@ -50,7 +51,7 @@
                     </h:panelGroup><br/>
                 
                 </h:panelGrid>
-                <p:commandButton action="#{roomBookingController.findHotels}" value="Search" style="width: 450px; height: 50px;"/><br/>
+                <p:commandButton ajax="false" action="#{roomBookingController.findHotels}" value="Search" style="width: 450px; height: 50px;"/><br/>
             </h:form>
                 </div>
             </div>

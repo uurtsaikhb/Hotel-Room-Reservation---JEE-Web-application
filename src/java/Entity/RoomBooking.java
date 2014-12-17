@@ -26,7 +26,10 @@ import javax.persistence.TemporalType;
 @NamedQuery(name = "Booking.findRoom",
             query = "SELECT DISTINCT r FROM Room r WHERE r.hotel.id = :id AND r.id NOT IN ("
                     + "SELECT DISTINCT b.room.id FROM RoomBooking b WHERE b.dateFrom BETWEEN :dateFrom and :dateTo "
-                    + "OR b.dateTo between :dateFrom and :dateTo)")
+                    + "OR b.dateTo between :dateFrom and :dateTo)"),
+       @NamedQuery(name = "Booking.checkConfNum",
+            query = "SELECT b FROM RoomBooking b WHERE b.confirmation = :confirmation")
+
     
 })
 public class RoomBooking implements Serializable {
@@ -37,7 +40,8 @@ public class RoomBooking implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dateFrom;
     @Temporal(TemporalType.DATE)
-    private Date dateTo;
+    private Date dateTo; 
+    private Long confirmation;
     @ManyToOne
     private Room room;
     private int no_of_people;
@@ -92,6 +96,14 @@ public class RoomBooking implements Serializable {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Long getConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(Long confirmation) {
+        this.confirmation = confirmation;
     }
     
     

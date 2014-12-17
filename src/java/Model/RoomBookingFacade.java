@@ -33,6 +33,18 @@ public class RoomBookingFacade extends AbstractFacade<RoomBooking> {
     public RoomBookingFacade() {
         super(RoomBooking.class);
     }
+    public RoomBooking findBooking(Long confirmation){
+        RoomBooking roomBooking= new RoomBooking();
+       try{
+            Query query = em.createNamedQuery("Booking.checkConfNum");
+            query.setParameter("confirmation", confirmation);
+            roomBooking = (RoomBooking) query.getSingleResult();
+            return roomBooking;
+        }
+        catch (NoResultException e) {
+            return null;
+    }
+    }
     public List<Room> findAvailabileRooms(Long id, Date checkin, Date checkout){
         List<Room> rooms;
         rooms= new ArrayList<>();
