@@ -125,7 +125,7 @@ public class BookingController {
        checkoutDay.month(month+1);
        checkoutDay.year(year);
        checkoutDay.dayOfMonth(day);
-       checkoutDay.hour("12");
+       checkoutDay.hour("18");
        
     timerService.createCalendarTimer(checkoutDay, new TimerConfig(rbooking, true));
         

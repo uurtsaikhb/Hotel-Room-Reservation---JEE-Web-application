@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -14,20 +15,18 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditCustomerLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{customerController.selected.id}" title="#{bundle.EditCustomerTitle_id}" />
-                    <h:outputLabel value="#{bundle.EditCustomerLabel_address}" for="address" />
-                    <h:inputText id="address" value="#{customerController.selected.address}" title="#{bundle.EditCustomerTitle_address}" />
-                    <h:outputLabel value="#{bundle.EditCustomerLabel_fname}" for="fname" />
-                    <h:inputText id="fname" value="#{customerController.selected.fname}" title="#{bundle.EditCustomerTitle_fname}" />
-                    <h:outputLabel value="#{bundle.EditCustomerLabel_lname}" for="lname" />
-                    <h:inputText id="lname" value="#{customerController.selected.lname}" title="#{bundle.EditCustomerTitle_lname}" />
-                    <h:outputLabel value="#{bundle.EditCustomerLabel_email}" for="email" />
-                    <h:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.EditCustomerTitle_email}" />
-                    <h:outputLabel value="#{bundle.EditCustomerLabel_password}" for="password" />
-                    <h:inputText id="password" value="#{customerController.selected.password}" title="#{bundle.EditCustomerTitle_password}" />
-                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:inputText id="fname" value="#{customerController.selected.fname}" placeholder="First name" />
+                    <p:inputText id="lname" value="#{customerController.selected.lname}" placeholder="Last name" />
+                    <p:inputText id="email" value="#{customerController.selected.email}" placeholder="Email" size="32"/>
+                    <p:inputText id="street" value="#{customerController.selected.address.street}" placeholder="Street" size="32"/>
+                    <p:password id="password" value="#{customerController.selected.password}" placeholder="Password" />
+                    <p:inputText id="city" value="#{customerController.selected.address.city}" placeholder="City" />
+                    <p:inputText id="state" value="#{customerController.selected.address.province}" placeholder="State" />
+                    <p:inputText id="zipCode" value="#{customerController.selected.address.zipCode}" placeholder="Zip" />
+                    <p:inputText id="phone" value="#{customerController.selected.address.phone}" placeholder="Phone" />
+
+                </h:panelGrid> 
                 <h:commandLink action="#{customerController.update}" value="#{bundle.EditCustomerSaveLink}"/>
                 <br />
                 <br />

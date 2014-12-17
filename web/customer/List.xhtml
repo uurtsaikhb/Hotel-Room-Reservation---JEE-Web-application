@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListCustomerTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            <h:form id="form" styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
@@ -19,54 +20,82 @@
                     <h:outputText value="#{customerController.pagination.pageFirstItem + 1}..#{customerController.pagination.pageLastItem + 1}/#{customerController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{customerController.previous}" value="#{bundle.Previous} #{customerController.pagination.pageSize}" rendered="#{customerController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{customerController.next}" value="#{bundle.Next} #{customerController.pagination.pageSize}" rendered="#{customerController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{customerController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCustomerTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCustomerTitle_address}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.address}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCustomerTitle_fname}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fname}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCustomerTitle_lname}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.lname}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCustomerTitle_email}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.email}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCustomerTitle_password}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.password}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{customerController.prepareView}" value="#{bundle.ListCustomerViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{customerController.prepareEdit}" value="#{bundle.ListCustomerEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{customerController.destroy}" value="#{bundle.ListCustomerDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
+                    <p:growl id="msgs" showDetail="true"/>
+                    <p:dataTable value="#{customerController.items}" var="item" editable="true" style="margin-bottom:20px">
+                        <f:facet name="header">
+                            Customers
+                        </f:facet>
+                        <p:ajax event="rowEdit" listener="#{accountController.onRowEdit}" update=":form:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{accountController.onRowCancel}" update=":form:msgs" />
+ 
+                        <p:column headerText="ID">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.id}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.id}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="First Name">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.fname}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.fname}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Last Name">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.lname}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.lname}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Email">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.email}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.email}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Street">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{item.address.street}"/></f:facet>
+                                <f:facet name="input"><h:inputText value="#{item.address.street}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="City" style="width:100px">
+                            <p:cellEditor>
+                                <f:facet name="output"> <h:outputText value="#{item.address.city}"/></f:facet>
+                                <f:facet name="input"> <h:inputText value="#{item.address.city}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="State" style="width:100px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{item.address.province}"/></f:facet>
+                                <f:facet name="input"><h:inputText value="#{item.address.province}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Zip" style="width:80px">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.address.zipCode}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.address.zipCode}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Phone">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.address.phone}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.address.phone}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column>
+                            <p:column style="width:30px">
+                                <p:rowEditor />
+                            </p:column>
+                        </p:column>
+                         <p:column style="width:60px">
+                            
+                            <p:commandButton icon="ui-icon-close"
+                                             title="Delete this hotel"
+                                             actionListener="#{accountController.destroy}"
+                                             ajax="false" />
+                        </p:column>
+                    </p:dataTable>
                 </h:panelGroup>
                 <br />
                 <h:commandLink action="#{customerController.prepareCreate}" value="#{bundle.ListCustomerCreateLink}"/>

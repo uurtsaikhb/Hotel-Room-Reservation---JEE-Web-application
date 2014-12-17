@@ -4,6 +4,7 @@ import Entity.Hotel;
 import Controller.util.JsfUtil;
 import Controller.util.PaginationHelper;
 import Entity.Address;
+import Entity.FeatureHotel;
 import Model.HotelFacade;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,7 +31,11 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import org.primefaces.event.FileUploadEvent;
 import Entity.Picture;
+import Model.FeatureHotelFacade;
+import javax.annotation.PostConstruct;
 import javax.interceptor.Interceptors;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 
 @Named("hotelController")
 @SessionScoped
@@ -46,6 +51,10 @@ public class HotelController implements Serializable {
     private Model.PictureFacade ejbPictureFacade;
     @Inject
     private RoomBookingController roomBookingController;
+    @EJB 
+    private Model.FeatureHotelFacade ejbFeature;
+    
+    private FeatureHotel [] features;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -57,10 +66,11 @@ public class HotelController implements Serializable {
 
     public HotelController() {
     }
- //   @PostConstruct
+//    @PostConstruct
 //    public void intItems(){
-//       hotels= roomBookingController.getHotels();
-//       rooms=ejbFacade.find(2).getRooms();
+//       if (items == null) {
+//            items = getPagination().createPageDataModel();
+//        }
 //    }
 
     public List<Hotel> getHotels() {
@@ -75,6 +85,10 @@ public class HotelController implements Serializable {
     public void setRoomBookingController(RoomBookingController roomBookingController) {
         this.roomBookingController = roomBookingController;
     }
+
+    public FeatureHotelFacade getEjbFeature() {
+        return ejbFeature;
+    }
     
 
     public String findHotel(Hotel hotel){
@@ -86,6 +100,14 @@ public class HotelController implements Serializable {
         
         return null;
     }
+     public FeatureHotel[] getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(FeatureHotel[] features) {
+        this.features = features;
+    }
+  
     public Hotel getSelected() {
         if (current == null) {
             current = new Hotel();
@@ -131,20 +153,39 @@ public class HotelController implements Serializable {
         current = (Hotel) getItems().getRowData();
         address=current.getAddress();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "room/List";
+        return "/hotel/View";
     }
 
     public String prepareCreate() {
         current = new Hotel();
         address=new Address();
         selectedItemIndex = -1;
-        return "Create";
+        return "/hotel/Create";
     }
+    
+     public void addFeature(){
+        if(features.length>0){
+        for(FeatureHotel f: features){
+            current.getHotelFeatures().add(f);
+            f.getHotels().add(current);
+        }
+        }
+    }
+    private void editFearure() {
+        for(FeatureHotel f: current.getHotelFeatures()){
+            getEjbFeature().edit(f);
+        }
+    }
+    
 @Interceptors(Logging.class)
-    public String create() {
+         public String create() {
         current.setAddress(address);
+       
         try {
             getFacade().create(current);
+            addFeature();
+            getFacade().edit(current);
+            editFearure();
                     
             for (File file : files) {
                 Picture picture = new Picture(path + File.separator + file.getName(), current);
@@ -178,6 +219,14 @@ public class HotelController implements Serializable {
         }
     }
 
+//    public String delete(Hotel hotel){
+//        current = (Hotel) getItems().getRowData();
+//        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+//        performDestroy();
+//        recreatePagination();
+//        recreateModel();
+//        return "List";
+//    }
     public String destroy() {
         current = (Hotel) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -329,6 +378,28 @@ public class HotelController implements Serializable {
             out.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+    public void onRowEdit(RowEditEvent event) {
+        current=(Hotel) event.getObject();
+        FacesMessage msg = new FacesMessage("Hotel Edited", ((Hotel) event.getObject()).getId()+"");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        update();
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Hotel) event.getObject()).getId()+"");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+         
+        if(newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            update();
         }
     }
 
