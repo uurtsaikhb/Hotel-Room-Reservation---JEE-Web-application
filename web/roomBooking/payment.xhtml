@@ -33,38 +33,38 @@
                             Security Code:
                             <p:inputText size="10" value = "#{bankWS.securityNumber}"></p:inputText>
 
-                </h:panelGrid>
-                <h:panelGrid columns="3">
-                    Expiration date:
-                    <p:selectOneMenu value="#{bankWS.expdateMonth}">
-                        <f:selectItem itemValue="1" itemLabel="Jan" />  
-                        <f:selectItem itemValue="2" itemLabel="Feb" />  
-                        <f:selectItem itemValue="3" itemLabel="Mar" />  
-                        <f:selectItem itemValue="4" itemLabel="Apr" />  
-                        <f:selectItem itemValue="5" itemLabel="May" />
-                        <f:selectItem itemValue="6" itemLabel="Jun" />
-                        <f:selectItem itemValue="7" itemLabel="Jul" />
-                        <f:selectItem itemValue="8" itemLabel="Aug" />
-                        <f:selectItem itemValue="9" itemLabel="Sep" />
-                        <f:selectItem itemValue="10" itemLabel="Oct" />
-                        <f:selectItem itemValue="11" itemLabel="Nov" />
-                        <f:selectItem itemValue="12" itemLabel="Dec" />
-                    </p:selectOneMenu>
-                    <p:selectOneMenu value="#{bankWS.expdateYear}">
-                        <f:selectItem itemValue="2014" itemLabel="2014" />
-                        <f:selectItem itemValue="2015" itemLabel="2015" />
-                        <f:selectItem itemValue="2016" itemLabel="2016" />
-                        <f:selectItem itemValue="2017" itemLabel="2017" />
-                        <f:selectItem itemValue="2018" itemLabel="2018" />
-                        <f:selectItem itemValue="2019" itemLabel="2019" />
-                        <f:selectItem itemValue="2020" itemLabel="2020" />
-                    </p:selectOneMenu>
-                </h:panelGrid>
-                <div style="width: 100%; text-align: center">
-                    <h:commandButton id="checkbutton_id" value="Pay"  action="#{roomBookingController.create}" 
-                                     style="color: red; font-size: 16px; height: 40px; width: 120px; text-align: center"/>
-                </div>
-                <h:message for="j_idt85:checkbutton_id" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="3">
+                            Expiration date:
+                            <p:selectOneMenu value="#{bankWS.expdateMonth}">
+                                <f:selectItem itemValue="1" itemLabel="Jan" />  
+                                <f:selectItem itemValue="2" itemLabel="Feb" />  
+                                <f:selectItem itemValue="3" itemLabel="Mar" />  
+                                <f:selectItem itemValue="4" itemLabel="Apr" />  
+                                <f:selectItem itemValue="5" itemLabel="May" />
+                                <f:selectItem itemValue="6" itemLabel="Jun" />
+                                <f:selectItem itemValue="7" itemLabel="Jul" />
+                                <f:selectItem itemValue="8" itemLabel="Aug" />
+                                <f:selectItem itemValue="9" itemLabel="Sep" />
+                                <f:selectItem itemValue="10" itemLabel="Oct" />
+                                <f:selectItem itemValue="11" itemLabel="Nov" />
+                                <f:selectItem itemValue="12" itemLabel="Dec" />
+                            </p:selectOneMenu>
+                            <p:selectOneMenu value="#{bankWS.expdateYear}">
+                                <f:selectItem itemValue="2014" itemLabel="2014" />
+                                <f:selectItem itemValue="2015" itemLabel="2015" />
+                                <f:selectItem itemValue="2016" itemLabel="2016" />
+                                <f:selectItem itemValue="2017" itemLabel="2017" />
+                                <f:selectItem itemValue="2018" itemLabel="2018" />
+                                <f:selectItem itemValue="2019" itemLabel="2019" />
+                                <f:selectItem itemValue="2020" itemLabel="2020" />
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        <div style="width: 100%; text-align: center">
+                            <h:commandButton id="checkbutton_id" value="Pay"  action="#{bankWS.prepareCheckCard}" 
+                                             style="color: red; font-size: 16px; height: 40px; width: 120px; text-align: center"/>
+                        </div>
+                        <h:message for="j_idt85:checkbutton_id" />
 
                     </h:form>
                 </div></div>
