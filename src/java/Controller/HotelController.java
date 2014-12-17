@@ -77,6 +77,11 @@ public class HotelController implements Serializable {
     }
     
 
+    public String findHotel(Hotel hotel){
+        current=hotel;
+        return "/hotel/review";
+    }
+    
     public String getListOfRooms(String id){
         
         return null;

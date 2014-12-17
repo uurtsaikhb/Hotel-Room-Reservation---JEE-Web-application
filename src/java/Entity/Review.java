@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,14 +26,14 @@ public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date postedDate; 
+    private int rank;
+    private String reviewDisc;
     @ManyToOne
     private Hotel hotel;
     @ManyToOne
     private Account account;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date postedDate; 
-    private int rank;
-
     public Long getId() {
         return id;
     }
@@ -71,6 +72,14 @@ public class Review implements Serializable {
 
     public void setPostedDate(Date postedDate) {
         this.postedDate = postedDate;
+    }
+
+    public String getReviewDisc() {
+        return reviewDisc;
+    }
+
+    public void setReviewDisc(String reviewDisc) {
+        this.reviewDisc = reviewDisc;
     }
     
     

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>List of Hotels</title>
+        <script src="../resources/JS/script.js" type="text/javascript"></script>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/masterLayout.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <div class="hotel-list">
+                        <div class="hotel-list-content">
+                            <div class="hotel-list-image">
+                                <h:graphicImage library="images" name="hotel_default.jpg" width="160"/>
+                            </div>
+                            <br/>
+                            #{hotelController.selected.name}<br/>
+                            #{hotelController.selected.address}
+                            <ui:repeat value="#{hotelController.selected.reviews}" var="item">
+                                <div class="hotel-list-hotel">
+                                    <h:panelGrid class="hotelreviewlist">
+                                        <h:graphicImage library="images" name="personal.png" width="80" height="80"/><br/>
+                                        
+                                        <h:panelGroup>
+                                            
+                                            <p> <h:outputText value="#{item.account.fname}"/><br/>
+                                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rank>=1}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rank==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rank>=2}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rank==1 or item.rank==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rank>=3}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rank==2 or item.rank==1 or item.rank==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rank>=4}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rank==4 or item.rank==2 or item.rank==1 or item.rank==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rank>=5}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rank==4 or item.rank==3 or item.rank==2 or item.rank==1 or item.rank==0}}"/>
+                                               
+                                            </p>
+<!--                                            <p id="hoteRate">#{item.rank}</p>-->
+                                        </h:panelGroup>
+                                        <h:outputText value="#{item.reviewDisc}"/>
+                                    </h:panelGrid>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

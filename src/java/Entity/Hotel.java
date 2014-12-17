@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Transient;
 
 /**
  *
@@ -42,6 +43,8 @@ public class Hotel implements Serializable {
     @OneToMany(mappedBy = "hotel")
     @OrderBy("postedDate DESC")
     private List<Review> reviews;
+    @Transient
+    private int rate;
 
     public Long getId() {
         return id;
@@ -50,7 +53,25 @@ public class Hotel implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+     public int getRate() {
+        rate=0;
+        int count = 0;
+        int total = 0;
+        if(this.reviews.size()>0){
+        for(Review r:this.reviews){
+            total=total+r.getRank();
+            count++;
+        }
+        rate=(int) Math.round(total/count);
+        }
+        return rate;
+    }
 
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+     
     public Address getAddress() {
         return address;
     }

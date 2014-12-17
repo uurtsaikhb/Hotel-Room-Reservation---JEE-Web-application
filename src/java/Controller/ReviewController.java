@@ -3,10 +3,16 @@ package Controller;
 import Entity.Review;
 import Controller.util.JsfUtil;
 import Controller.util.PaginationHelper;
+import Entity.Account;
+import Entity.Hotel;
+import Entity.RoomBooking;
 import Model.ReviewFacade;
+import Model.RoomBookingFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,6 +23,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 
 @Named("reviewController")
 @SessionScoped
@@ -24,13 +31,55 @@ public class ReviewController implements Serializable {
 
     private Review current;
     private DataModel items = null;
+    private Long conf;
+    private Hotel hotel;
+    private int rank;
+    private boolean disp;
+    private Account account;
+    private RoomBooking booking;
+    @Inject
+    private AccountController accountController;
+    @Inject
+    private RoomBookingController roomBookingController;
+    @Inject
+    private HotelController hotelController;
     @EJB
     private Model.ReviewFacade ejbFacade;
+    @Inject
+    private Model.RoomBookingFacade bookingEJBFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
     public ReviewController() {
     }
+    @PostConstruct
+    public void init(){
+        hotel=getHotelController().getSelected();
+        account=getAccountController().getSelected();
+        booking=getRoomBookingController().getSelected();
+        
+    }
+
+    public AccountController getAccountController() {
+        return accountController;
+    }
+
+    public RoomBookingController getRoomBookingController() {
+        return roomBookingController;
+    }
+
+    public HotelController getHotelController() {
+        return hotelController;
+    }
+
+    public Long getConf() {
+        return conf;
+    }
+
+    public void setConf(Long conf) {
+        this.conf = conf;
+    }
+    
 
     public Review getSelected() {
         if (current == null) {
@@ -43,6 +92,75 @@ public class ReviewController implements Serializable {
     private ReviewFacade getFacade() {
         return ejbFacade;
     }
+
+    public RoomBookingFacade getBookingEJBFacade() {
+        return bookingEJBFacade;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+        
+    }
+
+    public int getRank() {
+        return rank;
+    }
+    public void putRank(int rank){
+        this.rank=rank;
+        getSelected().setRank(rank);
+    }
+
+    public boolean isDisp() {
+        return disp;
+    }
+
+    public void setDisp(boolean disp) {
+        this.disp = disp;
+    }
+
+    public Account getAccount() {
+        if(account==null){
+            account=new Account();
+        }
+        return account;
+    }
+
+    public void setAccount(Account account) {
+         this.account = account;
+    }
+
+    public RoomBooking getBooking() {
+        if(booking==null){
+            booking=new RoomBooking();
+        }
+        return booking;
+    }
+
+    public void setBooking(RoomBooking booking) {
+      
+        this.booking = booking;
+    }
+    
+    
+    public String findBooking(){
+        setBooking(getBookingEJBFacade().findBooking(conf));
+        if(booking!=null){
+        hotel=booking.getRoom().getHotel();
+        account=booking.getAccount();
+        disp=true;
+        }
+        else{
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("confNumNotFound"));
+        }
+//       
+       
+        return "/review/reviewE";
+    }
+    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -76,10 +194,17 @@ public class ReviewController implements Serializable {
     public String prepareCreate() {
         current = new Review();
         selectedItemIndex = -1;
-        return "Create";
+        rank=0;
+        disp=false;
+        
+        JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("reviewAdd"));
+        return "/review/reviewE";
     }
 
     public String create() {
+        current.setAccount(account);
+        current.setHotel(hotel);
+        current.setPostedDate(new Date());
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ReviewCreated"));

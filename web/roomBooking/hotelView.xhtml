@@ -20,7 +20,7 @@
                                     <div class="hotel_image">
 
                                         <ui:repeat value="#{pictureController.getHotelPictures(item)}" var="picture" rendered="#{not empty pictureController.getHotelPictures(item)}" size="1">
-                                            <h:graphicImage value="../#{picture.path}" width="300" />
+                                            <h:graphicImage value="../#{picture.path}" width="300" height="160" />
                                         </ui:repeat>
                                         <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty pictureController.getHotelPictures(item)}" />
                                     </div>
@@ -40,7 +40,23 @@
                                         </div>
 
                                         <div class="hotel_info_review">
-                                            Reviews: #{item.reviews.size()}
+                                             <h:commandLink action="#{hotelController.findHotel(item)}">
+                                            <p id="reveStarImg">
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate>=1}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate>=2}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==1 or item.rate==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate>=3}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==2 or item.rate==1 or item.rate==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate>=4}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==3 or item.rate==2 or item.rate==1 or item.rate==0}"/>
+                                              <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{item.rate==5}"/>
+                                              <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{item.rate==4 or item.rate==3 or item.rate==2 or item.rate==1 or item.rate==0}"/>
+                                               
+                                            </p>
+                                                <p id="hoteRate">#{item.reviews.size()}</p>
+                                            verified customer reviews
+                                            </h:commandLink>
                                         </div>
 
                                         <div class="hotel_info_book_button">

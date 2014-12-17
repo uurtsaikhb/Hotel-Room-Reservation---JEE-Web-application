@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pa="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template/masterLayout.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Booking"></h:outputText>
+        </ui:define>
+         <ui:define name="content">
+            <div class="search-panel-wrapper">
+                    <div class="search-panel">
+                        <h3>Review</h3>
+               <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+                        <h:form id="reviewForm">
+                <h:outputLabel value="Please enter you confirmation number" rendered="#{!reviewController.disp}"/>
+                
+                <h:panelGrid columns="2" rendered="#{!reviewController.disp}">
+                    <h:outputText value="Confirmation Number"/>
+                    <h:inputText id="confInput" value="#{reviewController.conf}">
+                    </h:inputText>
+                    <h:commandButton action="#{reviewController.findBooking}" value="Search" /><br/>
+                </h:panelGrid>
+                <h:panelGrid class="reviewgrid" columns="1" rendered="#{reviewController.disp}">
+                    <h:panelGroup >
+                       For Hotel #{reviewController.hotel.name}
+                       <p>
+                           <h:commandLink action="#{reviewController.putRank(1)}" rendered="#{reviewController.rank>=1}">
+                               <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt="" />
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           <h:commandLink action="#{reviewController.putRank(1)}" rendered="#{reviewController.rank==0}">
+                               <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           <h:commandLink action="#{reviewController.putRank(2)}"  rendered="#{reviewController.rank>=2}">
+                               <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt=""/>
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           <h:commandLink action="#{reviewController.putRank(2)}" rendered="#{reviewController.rank==0 or reviewController.rank==1}">
+                               <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           <h:commandLink action="#{reviewController.putRank(3)}" rendered="#{reviewController.rank>=3}">
+                               <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt="" />
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           <h:commandLink action="#{reviewController.putRank(3)}" rendered="#{reviewController.rank==2 or reviewController.rank==0 or reviewController.rank==1}">
+                               <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           <h:commandLink action="#{reviewController.putRank(4)}"  rendered="#{reviewController.rank>=4}">
+                               <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt=""/>
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           <h:commandLink action="#{reviewController.putRank(4)}" rendered="#{reviewController.rank==3 or reviewController.rank==2 or reviewController.rank==0 or reviewController.rank==1}">
+                               <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           <h:commandLink action="#{reviewController.putRank(5)}"  rendered="#{reviewController.rank>=5}">
+                               <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt=""/>
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           <h:commandLink action="#{reviewController.putRank(5)}" rendered="#{reviewController.rank==4 or reviewController.rank==3 or reviewController.rank==2 or reviewController.rank==0 or reviewController.rank==1}">
+                               <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
+                               <f:ajax execute="@this" render="@all"/>
+                           </h:commandLink>
+                           will be posted as #{reviewController.account.fname}
+                       </p>
+                        
+                    </h:panelGroup>
+                    <h:inputTextarea value="#{reviewController.selected.reviewDisc}" cols="55" rows="20"/>
+                    <h:commandButton value="Submit" action="#{reviewController.create}"/>
+                    
+                    
+                </h:panelGrid>
+            </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>
