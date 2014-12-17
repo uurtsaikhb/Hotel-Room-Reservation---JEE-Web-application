@@ -8,6 +8,22 @@
 
 <xs:element name="checkCardResponse" type="tns:checkCardResponse"/>
 
+<xs:element name="checkDinner" type="tns:checkDinner"/>
+
+<xs:element name="checkDinnerResponse" type="tns:checkDinnerResponse"/>
+
+<xs:element name="checkDiscover" type="tns:checkDiscover"/>
+
+<xs:element name="checkDiscoverResponse" type="tns:checkDiscoverResponse"/>
+
+<xs:element name="checkMaster" type="tns:checkMaster"/>
+
+<xs:element name="checkMasterResponse" type="tns:checkMasterResponse"/>
+
+<xs:element name="checkVisa" type="tns:checkVisa"/>
+
+<xs:element name="checkVisaResponse" type="tns:checkVisaResponse"/>
+
 <xs:element name="hello" type="tns:hello"/>
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
@@ -28,7 +44,7 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="checkAmerican">
+<xs:complexType name="checkMaster">
 <xs:sequence>
 <xs:element name="arg0" type="tns:card" minOccurs="0"/>
 </xs:sequence>
@@ -43,7 +59,43 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="checkMasterResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkVisa">
+<xs:sequence>
+<xs:element name="arg0" type="tns:card" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkVisaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkAmerican">
+<xs:sequence>
+<xs:element name="arg0" type="tns:card" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="checkAmericanResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkDinner">
+<xs:sequence>
+<xs:element name="arg0" type="tns:card" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkDinnerResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
@@ -58,6 +110,18 @@
 <xs:complexType name="helloResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkDiscover">
+<xs:sequence>
+<xs:element name="arg0" type="tns:card" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkDiscoverResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

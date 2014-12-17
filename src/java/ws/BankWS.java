@@ -6,7 +6,6 @@
 package ws;
 
 import Controller.RoomBookingController;
-import Controller.util.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -21,7 +20,7 @@ import javax.xml.ws.WebServiceRef;
 @Named(value = "bankWS")
 @RequestScoped
 public class BankWS {
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/webservice/BankWebService.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/BankWebservice/BankWebService.wsdl")
     private BankWebService_Service service;
   
     @Inject RoomBookingController roomBooking;
@@ -40,14 +39,10 @@ public class BankWS {
     
     /* web service method */
     public boolean prepareCheckCard() {
-        
-        System.out.println(cardType);
-        System.out.println(cardNumber);
-        System.out.println("Check card");
+
         if (checkCard(cardType, cardNumber, securityNumber, expdateMonth, expdateYear)){
             System.out.println("card number is correct");
             return true;
-            //return "Confirmation?faces-redirect=true";
         } else {
             System.out.println("card number is incorrect !!!");
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Card information", "Card number is wrong !"));
@@ -97,12 +92,12 @@ public class BankWS {
         this.expdateYear = expdateYear;
     }
 
-
     private Boolean checkCard(java.lang.String cardType, java.lang.String cardNumber, java.lang.String securityCode, java.lang.String expdateMonth, java.lang.String expdateYear) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         ws.BankWebService port = service.getBankWebServicePort();
         return port.checkCard(cardType, cardNumber, securityCode, expdateMonth, expdateYear);
     }
-    
+
+
 }
