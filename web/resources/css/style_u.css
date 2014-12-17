@@ -75,3 +75,11 @@ and open the template in the editor.
         height: 40px;
         width: 120px;
     }
+    #hoteRate{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+#reveStarImg{
+     margin-top: 0px;
+    margin-bottom: 0px;
+}
