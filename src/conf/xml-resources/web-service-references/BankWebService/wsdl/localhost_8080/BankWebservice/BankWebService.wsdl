@@ -4,17 +4,17 @@
 <xsd:import namespace="http://ws/" schemaLocation="http://localhost:8080/BankWebservice/BankWebService?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="checkCard">
-<part name="parameters" element="tns:checkCard"/>
-</message>
-<message name="checkCardResponse">
-<part name="parameters" element="tns:checkCardResponse"/>
-</message>
 <message name="hello">
 <part name="parameters" element="tns:hello"/>
 </message>
 <message name="helloResponse">
 <part name="parameters" element="tns:helloResponse"/>
+</message>
+<message name="checkCard">
+<part name="parameters" element="tns:checkCard"/>
+</message>
+<message name="checkCardResponse">
+<part name="parameters" element="tns:checkCardResponse"/>
 </message>
 <message name="checkAmerican">
 <part name="parameters" element="tns:checkAmerican"/>
@@ -22,31 +22,62 @@
 <message name="checkAmericanResponse">
 <part name="parameters" element="tns:checkAmericanResponse"/>
 </message>
+<message name="checkVisa">
+<part name="parameters" element="tns:checkVisa"/>
+</message>
+<message name="checkVisaResponse">
+<part name="parameters" element="tns:checkVisaResponse"/>
+</message>
+<message name="checkDinner">
+<part name="parameters" element="tns:checkDinner"/>
+</message>
+<message name="checkDinnerResponse">
+<part name="parameters" element="tns:checkDinnerResponse"/>
+</message>
+<message name="checkDiscover">
+<part name="parameters" element="tns:checkDiscover"/>
+</message>
+<message name="checkDiscoverResponse">
+<part name="parameters" element="tns:checkDiscoverResponse"/>
+</message>
+<message name="checkMaster">
+<part name="parameters" element="tns:checkMaster"/>
+</message>
+<message name="checkMasterResponse">
+<part name="parameters" element="tns:checkMasterResponse"/>
+</message>
 <portType name="BankWebService">
-<operation name="checkCard">
-<input wsam:Action="http://ws/BankWebService/checkCardRequest" message="tns:checkCard"/>
-<output wsam:Action="http://ws/BankWebService/checkCardResponse" message="tns:checkCardResponse"/>
-</operation>
 <operation name="hello">
 <input wsam:Action="http://ws/BankWebService/helloRequest" message="tns:hello"/>
 <output wsam:Action="http://ws/BankWebService/helloResponse" message="tns:helloResponse"/>
+</operation>
+<operation name="checkCard">
+<input wsam:Action="http://ws/BankWebService/checkCardRequest" message="tns:checkCard"/>
+<output wsam:Action="http://ws/BankWebService/checkCardResponse" message="tns:checkCardResponse"/>
 </operation>
 <operation name="checkAmerican">
 <input wsam:Action="http://ws/BankWebService/checkAmericanRequest" message="tns:checkAmerican"/>
 <output wsam:Action="http://ws/BankWebService/checkAmericanResponse" message="tns:checkAmericanResponse"/>
 </operation>
+<operation name="checkVisa">
+<input wsam:Action="http://ws/BankWebService/checkVisaRequest" message="tns:checkVisa"/>
+<output wsam:Action="http://ws/BankWebService/checkVisaResponse" message="tns:checkVisaResponse"/>
+</operation>
+<operation name="checkDinner">
+<input wsam:Action="http://ws/BankWebService/checkDinnerRequest" message="tns:checkDinner"/>
+<output wsam:Action="http://ws/BankWebService/checkDinnerResponse" message="tns:checkDinnerResponse"/>
+</operation>
+<operation name="checkDiscover">
+<input wsam:Action="http://ws/BankWebService/checkDiscoverRequest" message="tns:checkDiscover"/>
+<output wsam:Action="http://ws/BankWebService/checkDiscoverResponse" message="tns:checkDiscoverResponse"/>
+</operation>
+<operation name="checkMaster">
+<input wsam:Action="http://ws/BankWebService/checkMasterRequest" message="tns:checkMaster"/>
+<output wsam:Action="http://ws/BankWebService/checkMasterResponse" message="tns:checkMasterResponse"/>
+</operation>
 </portType>
 <binding name="BankWebServicePortBinding" type="tns:BankWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="checkCard">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="hello">
 <soap:operation soapAction=""/>
 <input>
@@ -56,7 +87,52 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="checkCard">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="checkAmerican">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="checkVisa">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="checkDinner">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="checkDiscover">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="checkMaster">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
