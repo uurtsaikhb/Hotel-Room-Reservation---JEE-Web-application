@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>List of Hotels</title>
+        <title>Hotel</title>
 
     </h:head>
     <h:body>
@@ -52,6 +52,7 @@
                                 <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==4 or roomBookingController.hotel.rate==3 or roomBookingController.hotel.rate==2 or roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
                                 #{roomBookingController.hotel.reviews.size()} verified customer reviews
                             </p>
+
                         </td>
                     </tr>
                 </table>
@@ -70,9 +71,9 @@
                         <thead>
                             <tr>
                                 <th>Picture</th>
-                                <th>Room type</th>
-                                <th>Price</th>
                                 <th>Max</th>
+                                <th>Price</th>
+                                <th>No. Rooms </th>
                                 <th>Total price</th>
                                 <th></th>
                             </tr>
@@ -80,17 +81,18 @@
                         <ui:repeat value="#{roomBookingController.rooms}" var="item">
                             <tr>
                                 <td>
+                                    #{item.type}<br/>
                                     <h:graphicImage value="../#{item.path}" width="160" />
                                     <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty item.path}" />
                                 </td>
                                 <td>
-                                    #{item.type}
+                                    #{item.max}
                                 </td>
                                 <td>
                                     #{item.price}
                                 </td>
                                 <td>
-                                    <h:selectOneMenu id="subscriptions" value="#{item.max}">
+                                    <h:selectOneMenu id="subscriptions" value="#{roomBookingController.selected.noRoom}">
                                         <f:selectItem id="item1"  itemValue="1" />
                                         <f:selectItem id="item2"  itemValue="2" />
                                         <f:selectItem id="item3"  itemValue="3" />
@@ -100,7 +102,7 @@
                                     </h:selectOneMenu>
                                 </td>
                                 <td>
-                                    <h:outputText id="maxId" value="#{item.price * item.max}"/>
+                                    <h:outputText id="maxId" value="#{item.price * roomBookingController.selected.noRoom}"/>
                                 </td>
                                 <td>
                                     <p:commandButton action="#{roomBookingController.addingRoom(item)}" value="Book"/>
@@ -108,6 +110,19 @@
                             </tr>
                         </ui:repeat>
                     </table>
+                    <div style="background-color: white; border-collapse: collapse;" class="room_list">
+                        <ui:repeat  value="#{roomBookingController.hotel.hotelFeatures}" var="feature">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="#{feature.feature_type}"/>
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <p:outputLabel value="#{feature.discription}"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </ui:repeat>
+                    </div>
+                        
                 </h:form>
 
             </ui:define>

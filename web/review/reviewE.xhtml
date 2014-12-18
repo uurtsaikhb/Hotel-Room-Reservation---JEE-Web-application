@@ -33,43 +33,43 @@
                        <p>
                            <h:commandLink action="#{reviewController.putRank(1)}" rendered="#{reviewController.rank>=1}">
                                <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt="" />
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            <h:commandLink action="#{reviewController.putRank(1)}" rendered="#{reviewController.rank==0}">
                                <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            <h:commandLink action="#{reviewController.putRank(2)}"  rendered="#{reviewController.rank>=2}">
                                <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt=""/>
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            <h:commandLink action="#{reviewController.putRank(2)}" rendered="#{reviewController.rank==0 or reviewController.rank==1}">
                                <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            <h:commandLink action="#{reviewController.putRank(3)}" rendered="#{reviewController.rank>=3}">
                                <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt="" />
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            <h:commandLink action="#{reviewController.putRank(3)}" rendered="#{reviewController.rank==2 or reviewController.rank==0 or reviewController.rank==1}">
                                <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            <h:commandLink action="#{reviewController.putRank(4)}"  rendered="#{reviewController.rank>=4}">
                                <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt=""/>
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            <h:commandLink action="#{reviewController.putRank(4)}" rendered="#{reviewController.rank==3 or reviewController.rank==2 or reviewController.rank==0 or reviewController.rank==1}">
                                <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            <h:commandLink action="#{reviewController.putRank(5)}"  rendered="#{reviewController.rank>=5}">
                                <h:graphicImage library="images" name="star_full.png" width="50" height="55" alt=""/>
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            <h:commandLink action="#{reviewController.putRank(5)}" rendered="#{reviewController.rank==4 or reviewController.rank==3 or reviewController.rank==2 or reviewController.rank==0 or reviewController.rank==1}">
                                <h:graphicImage library="images" name="star_none.png" width="50" height="55" alt=""/>
-                               <f:ajax execute="@this" render="@all"/>
+<!--                               <f:ajax execute="@this" render="@all"/>-->
                            </h:commandLink>
                            will be posted as #{reviewController.account.fname}
                        </p>

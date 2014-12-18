@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -47,6 +48,8 @@ public class RoomBooking implements Serializable {
     private int no_of_people;
     @ManyToOne
     private Account account;
+    @Transient
+    private int noRoom =1;
     
             
 
@@ -105,6 +108,15 @@ public class RoomBooking implements Serializable {
     public void setConfirmation(Long confirmation) {
         this.confirmation = confirmation;
     }
+
+    public int getNoRoom() {
+        return noRoom;
+    }
+
+    public void setNoRoom(int noRoom) {
+        this.noRoom = noRoom;
+    }
+    
     
     
 

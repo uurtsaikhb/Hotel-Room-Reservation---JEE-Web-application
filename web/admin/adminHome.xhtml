@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateHotelTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">     
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateHotelLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{hotelController.selected.id}" title="#{bundle.CreateHotelTitle_id}" />
+                    <h:outputLabel value="#{bundle.CreateHotelLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{hotelController.selected.name}" title="#{bundle.CreateHotelTitle_name}" />
+                    <h:outputLabel value="Street" for="street" />
+                    <h:inputText id="street" value="#{hotelController.address.street}" title="Street" />
+                    <h:outputLabel value="City" for="city" />
+                    <h:inputText id="city" value="#{hotelController.address.city}" title="City" />
+                    <h:outputLabel value="State" for="state" />
+                    <h:inputText id="state" value="#{hotelController.address.province}" title="State" />
+                    <h:outputLabel value="Zip Code" for="zipCode" />
+                    <h:inputText id="zipCode" value="#{hotelController.address.zipCode}" title="Zip Code" />
+                    <h:outputLabel value="Phone" for="phone" />
+                    <h:inputText id="phone" value="#{hotelController.address.phone}" title="Phone" />
+                    <h:outputLabel value="Photos" for="photos" />
+                    <p:fileUpload fileUploadListener="#{hotelController.upload}" mode="advanced" dragDropSupport="true"
+                            multiple="true" update="messages" sizeLimit="1000000" fileLimit="10" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                    <p:growl id="messages" showDetail="true" />
+                </h:panelGrid>
+                <br/>
+                <p:dataTable value="#{featureHotelController.items}" var="feature" tableStyle="width:auto"
+                             selection="#{hotelController.features}"  rowKey='#{feature}'>
+                   <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_feature_type}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.feature_type}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_discription}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.discription}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.id}"/>
+                        </p:column>
+                    
+                    <p:column selectionMode="multiple" style="width:2%" />
+                </p:dataTable>
+<!--                <h:selectManyCheckbox id="grid" value="#{hotelController.features}" layout="grid" >
+                    <f:selectItems value="#{featureHotelController.itemsAvailableSelectMany}" var="feature" itemLabel="#{feature}" itemValue="#{feature.description}" />
+
+                </h:selectManyCheckbox>-->
+                <h:commandLink action="#{hotelController.create}" value="#{bundle.CreateHotelSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{hotelController.prepareList}" value="#{bundle.CreateHotelShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateHotelIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

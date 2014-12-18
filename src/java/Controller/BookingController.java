@@ -83,18 +83,6 @@ public class BookingController {
         }
         return number;
     }
-//    public void createBooking(RoomBooking booking){
-//        if(validateDate(booking.getDateFrom(), booking.getDateTo())){
-//            
-//            getEjbFacade().create(booking);
-//            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RoomBookingCreated"));
-//        }
-//        else
-//            {
-//            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("DateError"));
-//    }
-//      
-//    }
     public void addAccount(Account account){
         
         getAccoutnEjbFacade().create(account);

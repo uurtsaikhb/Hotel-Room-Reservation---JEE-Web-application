@@ -7,6 +7,7 @@ package Controller;
 
 import Controller.util.JsfUtil;
 import Entity.Account;
+import Entity.Administrator;
 import Model.AccountFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -111,7 +112,11 @@ public class LoginController implements Serializable {
         if (account != null) {
             if (password.equals(account.getPassword())) {
                 isLoggedIn=true;
-                return requestedUrl;
+                if(account instanceof Administrator){
+                    return "/administrator/adminHome";
+                }
+                else
+                    return requestedUrl;
             }
         } else {
             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("notMatch"));
