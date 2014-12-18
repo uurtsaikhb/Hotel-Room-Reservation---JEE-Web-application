@@ -5,6 +5,7 @@ import Controller.util.JsfUtil;
 import Controller.util.PaginationHelper;
 import Entity.Address;
 import Entity.FeatureHotel;
+import Entity.Location;
 import Model.HotelFacade;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,6 +50,8 @@ public class HotelController implements Serializable {
     private Model.HotelFacade ejbFacade;    
     @EJB
     private Model.PictureFacade ejbPictureFacade;
+    @EJB
+    private Model.LocationFacade ejbLocationFacade;
     @Inject
     private RoomBookingController roomBookingController;
     @EJB 
@@ -63,6 +66,10 @@ public class HotelController implements Serializable {
     private final String path = "resources" + File.separator + "uploadhotel";
     private final ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
     private String destination = servletContext.getRealPath(File.separator + path);
+    
+    //Amar added for location
+    private double lat;
+    private double lng;
 
     public HotelController() {
     }
@@ -192,6 +199,9 @@ public class HotelController implements Serializable {
                 ejbPictureFacade.create(picture);
             }
             files.clear();
+            
+            Location location = new Location(lat,lng,current);
+            ejbLocationFacade.create(location);
             
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("HotelCreated"));
             return prepareCreate();
@@ -403,4 +413,19 @@ public class HotelController implements Serializable {
         }
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
 }

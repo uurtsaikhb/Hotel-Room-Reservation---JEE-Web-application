@@ -12,6 +12,56 @@
     <h:body>
         <ui:composition template="/template/masterLayout.xhtml">
             <ui:define name="content">
+                
+                <table width="100%" border="0" bgcolor="#FFFFFF" cellspacing="8">
+                    <tr>
+                        <td>
+                            <h3><h:outputText id="hotelLink" value="#{roomBookingController.hotel.name}" /></h3>
+
+                            <div class="hotel_info_location">
+                                <div class="hotel_info_address">
+                                    <h:outputText value="#{roomBookingController.hotel.address.street}"/>,
+                                    <h:outputText value="#{roomBookingController.hotel.address.city}" />,
+                                    <h:outputText value="#{roomBookingController.hotel.address.province}" />,
+                                    <h:outputText value="#{roomBookingController.hotel.address.zipCode}" />
+
+
+                                    <ui:repeat value="#{locationController.getHotelLocation(roomBookingController.hotel)}" var="location">
+                                        (<p:commandLink value="Show on map" type="button" onclick="PF('dlg3').show();" />)
+                                        <p:dialog header="#{roomBookingController.hotel.name}" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" width="650" height="450">
+                                            <p:gmap center ="#{mapBean.setCenterCoords(location,roomBookingController.hotel.name)}"
+                                                    model="#{mapBean.mapModel}" zoom="15" type="TERRIAN" style="width:600px;height:400px" />
+                                        </p:dialog>  
+                                    </ui:repeat>
+
+
+
+                                </div>
+                            </div>
+
+                            <p id="reveStarImg">
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate>=1}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==0}"/>
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate>=2}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate>=3}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==2 or roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate>=4}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==3 or roomBookingController.hotel.rate==2 or roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
+                                <h:graphicImage library="images" name="star_full.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==5}"/>
+                                <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==4 or roomBookingController.hotel.rate==3 or roomBookingController.hotel.rate==2 or roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
+                                #{roomBookingController.hotel.reviews.size()} verified customer reviews
+                            </p>
+
+
+                            <div class="hotel_info_book_button">
+                                <p:commandButton id="myButton" 
+                                                 action="#{roomBookingController.findHotelById(item.id)}" 
+                                                 value="Select"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
                 <h:form><center>
                         <p:galleria value="#{pictureController.getHotelPictures(roomBookingController.hotel)}" var="image" panelWidth="780" showCaption="false">
                             <p:graphicImage value="../#{image.path}"/>
