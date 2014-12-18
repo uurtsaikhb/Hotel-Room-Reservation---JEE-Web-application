@@ -137,7 +137,7 @@ public class Hotel implements Serializable {
 
     @Override
     public String toString() {
-        return id + "";
+        return this.getName();
     }
     
 }
