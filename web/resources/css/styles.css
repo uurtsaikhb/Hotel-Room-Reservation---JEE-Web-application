@@ -345,7 +345,8 @@ ul
     background:linear-gradient(to bottom, #f2ab1e 5%, #f0c911 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2ab1e', endColorstr='#f0c911',GradientType=0);
     background-color:#f2ab1e;
-}
+} 
+
 .myButton:active {
     position:relative;
     top:1px;

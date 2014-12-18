@@ -14,7 +14,7 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form id="form">
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateHotelLabel_name}" for="name" />
                     <h:inputText id="name" value="#{hotelController.selected.name}" title="#{bundle.CreateHotelTitle_name}" />
