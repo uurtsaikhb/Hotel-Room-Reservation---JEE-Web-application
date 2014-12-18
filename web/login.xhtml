@@ -13,24 +13,26 @@
             <ui:define name="content">
                 <div class="search-panel-wrapper">
                     <div class="search-panel">
-                        <h3>Login</h3>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-                        <h:form>
-                            <h:panelGrid columns="1">
-                                <p:inputText placeholder="Email" id="email" value="#{loginController.email}" title="#{bundle.CreateAccountTitle_email}" required="true"
-                                             requiredMessage="Please enter your email."/>
-                                <p:password placeholder="Password" id="password" value="#{loginController.password}" title="#{bundle.CreateAccountTitle_password}" required="true"
-                                            requiredMessage="Please enter your Password."/>
-                                <h:panelGroup>
-                                    <p:commandButton value="Login" action="#{loginController.login}">
-                                        <f:param name="url" value="/index"/>
-                                    </p:commandButton>
-                                <p:commandButton value="Sign Up" action="/account/Create.xhtml" immediate="true" />
-                                </h:panelGroup>
-                            </h:panelGrid>
-                        </h:form>
+                        <div style="width: 50%; text-align: center; margin: 0 auto">
+                            <h3>Sign in</h3>
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                            </h:panelGroup>
+                            <h:form>
+                                <h:panelGrid columns="1">
+                                    <p:inputText placeholder="Email" id="email" value="#{loginController.email}" title="#{bundle.CreateAccountTitle_email}" required="true"
+                                                 requiredMessage="Please enter your email."/>
+                                    <p:password placeholder="Password" id="password" value="#{loginController.password}" title="#{bundle.CreateAccountTitle_password}" required="true"
+                                                requiredMessage="Please enter your Password."/>
+                                    <h:panelGroup>
+                                        <p:commandButton value="Login" action="#{loginController.login}">
+                                            <f:param name="url" value="/index"/>
+                                        </p:commandButton>
+                                        <p:commandButton value="Sign Up" action="/account/Create.xhtml" immediate="true" />
+                                    </h:panelGroup>
+                                </h:panelGrid>
+                            </h:form>
+                        </div>
                     </div>
                 </div>
 
