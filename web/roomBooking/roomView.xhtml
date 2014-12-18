@@ -52,13 +52,6 @@
                                 <h:graphicImage library="images" name="star_none.png" width="25" height="25" alt="" rendered="#{roomBookingController.hotel.rate==4 or roomBookingController.hotel.rate==3 or roomBookingController.hotel.rate==2 or roomBookingController.hotel.rate==1 or roomBookingController.hotel.rate==0}"/>
                                 #{roomBookingController.hotel.reviews.size()} verified customer reviews
                             </p>
-
-
-                            <div class="hotel_info_book_button">
-                                <p:commandButton id="myButton" 
-                                                 action="#{roomBookingController.findHotelById(item.id)}" 
-                                                 value="Select"/>
-                            </div>
                         </td>
                     </tr>
                 </table>
