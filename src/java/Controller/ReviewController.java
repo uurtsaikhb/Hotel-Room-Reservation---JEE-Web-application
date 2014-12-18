@@ -109,9 +109,10 @@ public class ReviewController implements Serializable {
     public int getRank() {
         return rank;
     }
-    public void putRank(int rank){
+    public String putRank(int rank){
         this.rank=rank;
         getSelected().setRank(rank);
+        return null;
     }
 
     public boolean isDisp() {

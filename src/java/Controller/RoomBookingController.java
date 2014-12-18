@@ -6,7 +6,6 @@ import Controller.util.PaginationHelper;
 import Entity.Account;
 import Entity.Hotel;
 import Entity.Room;
-import Model.AccountFacade;
 import Model.HotelFacade;
 import Model.RoomBookingFacade;
 import Model.RoomFacade;
@@ -43,6 +42,7 @@ public class RoomBookingController implements Serializable {
     private Hotel hotel;
     private DataModel items = null;
     private String place;
+     private Long conf;
 
     public Hotel getHotel() {
         return hotel;
@@ -163,6 +163,19 @@ public class RoomBookingController implements Serializable {
         return ejbFacade;
     }
 
+    public Long getConf() {
+        return conf;
+    }
+
+    public void setConf(Long conf) {
+        this.conf = conf;
+    }
+
+      public String findBooking(){
+        current=getFacade().findBooking(conf);
+        return "/roomBooking/View";
+        
+    }
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -228,7 +241,9 @@ public class RoomBookingController implements Serializable {
     }
     public String createAccount(){
        getBookingController().addAccount(account);
-        return "/roomBooking/payment";
+       loginController.setAccount(account);
+       loginController.setIsLoggedIn(true);
+        return "/roomBooking/payment?faces-redirect=true";
     }
 
     public String create() {

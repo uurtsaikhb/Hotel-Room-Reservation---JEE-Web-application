@@ -71,9 +71,9 @@
                         <thead>
                             <tr>
                                 <th>Picture</th>
-                                <th>Room type</th>
-                                <th>Price</th>
                                 <th>Max</th>
+                                <th>Price</th>
+                                <th>No. Rooms </th>
                                 <th>Total price</th>
                                 <th></th>
                             </tr>
@@ -81,17 +81,18 @@
                         <ui:repeat value="#{roomBookingController.rooms}" var="item">
                             <tr>
                                 <td>
+                                    #{item.type}<br/>
                                     <h:graphicImage value="../#{item.path}" width="160" />
                                     <h:graphicImage value="../resources/images/default_product.png" width="160" rendered="#{empty item.path}" />
                                 </td>
                                 <td>
-                                    #{item.type}
+                                    #{item.max}
                                 </td>
                                 <td>
                                     #{item.price}
                                 </td>
                                 <td>
-                                    <h:selectOneMenu id="subscriptions" value="#{item.max}">
+                                    <h:selectOneMenu id="subscriptions" value="#{roomBookingController.selected.noRoom}">
                                         <f:selectItem id="item1"  itemValue="1" />
                                         <f:selectItem id="item2"  itemValue="2" />
                                         <f:selectItem id="item3"  itemValue="3" />
@@ -101,7 +102,7 @@
                                     </h:selectOneMenu>
                                 </td>
                                 <td>
-                                    <h:outputText id="maxId" value="#{item.price * item.max}"/>
+                                    <h:outputText id="maxId" value="#{item.price * roomBookingController.selected.noRoom}"/>
                                 </td>
                                 <td>
                                     <p:commandButton action="#{roomBookingController.addingRoom(item)}" value="Book"/>
