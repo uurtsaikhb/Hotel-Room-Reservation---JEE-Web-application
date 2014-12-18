@@ -93,9 +93,12 @@ public class BankWS {
     }
 
     private Boolean checkCard(java.lang.String cardType, java.lang.String cardNumber, java.lang.String securityCode, java.lang.String expdateMonth, java.lang.String expdateYear) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
         ws.BankWebService port = service.getBankWebServicePort();
         return port.checkCard(cardType, cardNumber, securityCode, expdateMonth, expdateYear);
     }
+
 
 
 }
