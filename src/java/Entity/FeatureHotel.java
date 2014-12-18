@@ -82,7 +82,7 @@ public class FeatureHotel implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.HotelFeature[ id=" + id + " ]";
+        return id +"";
     }
     
 }

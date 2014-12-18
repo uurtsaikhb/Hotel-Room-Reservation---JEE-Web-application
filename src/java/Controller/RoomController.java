@@ -3,6 +3,9 @@ package Controller;
 import Entity.Room;
 import Controller.util.JsfUtil;
 import Controller.util.PaginationHelper;
+import Entity.FeatureRoom;
+import Entity.Hotel;
+import Model.FeatureRoomFacade;
 import Model.RoomFacade;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,7 +31,9 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.RowEditEvent;
 
 @Named("roomController")
 @SessionScoped
@@ -41,6 +46,9 @@ public class RoomController implements Serializable {
     private Model.RoomFacade ejbFacade;
     @Inject
     private HotelController hotelController;
+    @EJB
+    private Model.FeatureRoomFacade ejbRFFacade;
+    private FeatureRoom [] features;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     
@@ -77,7 +85,19 @@ public class RoomController implements Serializable {
     private RoomFacade getFacade() {
         return ejbFacade;
     }
+ public FeatureRoom[] getFeatures() {
+        return features;
+    }
 
+    public void setFeatures(FeatureRoom[] features) {
+        this.features = features;
+    }
+
+    public FeatureRoomFacade getEjbRFFacade() {
+        return ejbRFFacade;
+    }
+
+    
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -113,10 +133,29 @@ public class RoomController implements Serializable {
         return "Create";
     }
 
+        public void addFeature(){
+        if(features.length>0){
+        for(FeatureRoom f: features){
+            current.getFeatureRooms().add(f);
+            f.getRooms().add(current);
+        }
+        }
+    }
+    private void editFearure() {
+        for(FeatureRoom f: current.getFeatureRooms()){
+            getEjbRFFacade().edit(f);
+        }
+    }
+    
     public String create() {
         try {
-            current.setPath(path + File.separator + file.getName());
+            if (file.getName() != null) {
+                current.setPath(path + File.separator + file.getName());
+            }
             getFacade().create(current);
+            addFeature();
+            getFacade().edit(current);
+            editFearure();
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RoomCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -292,6 +331,29 @@ public class RoomController implements Serializable {
             out.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+    
+    public void onRowEdit(RowEditEvent event) {
+        current=(Room) event.getObject();
+        FacesMessage msg = new FacesMessage("Room Edited", ((Room) event.getObject()).getId()+"");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        update();
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Room) event.getObject()).getId()+"");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+         
+        if(newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            update();
         }
     }
 

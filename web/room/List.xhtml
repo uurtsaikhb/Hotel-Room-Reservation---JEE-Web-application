@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListRoomTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            <h:form id="form" styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
@@ -19,54 +20,62 @@
                     <h:outputText value="#{roomController.pagination.pageFirstItem + 1}..#{roomController.pagination.pageLastItem + 1}/#{roomController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{roomController.previous}" value="#{bundle.Previous} #{roomController.pagination.pageSize}" rendered="#{roomController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{roomController.next}" value="#{bundle.Next} #{roomController.pagination.pageSize}" rendered="#{roomController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{roomController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomTitle_hotel}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.hotel}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomTitle_type}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.type}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomTitle_smoking}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.smoking}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomTitle_price}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.price}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{roomController.prepareView}" value="#{bundle.ListRoomViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{roomController.prepareEdit}" value="#{bundle.ListRoomEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{roomController.destroy}" value="#{bundle.ListRoomDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
+                    <p:growl id="msgs" showDetail="true"/>
+                    <p:dataTable value="#{roomController.items}" var="item" editable="true" style="margin-bottom:20px">
+                        <f:facet name="header">
+                            Rooms
+                        </f:facet>
+                        <p:ajax event="rowEdit" listener="#{roomController.onRowEdit}" update=":form:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{roomController.onRowCancel}" update=":form:msgs" />
+ 
+                        <p:column headerText="ID" style="width:64px">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.id}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.id}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                         <p:column headerText="Type" style="width:120px">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.type}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.type}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Price" style="width:64px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{item.price}"/></f:facet>
+                                <f:facet name="input"><h:inputText value="#{item.price}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Smooking" style="width:120px">
+                            <p:cellEditor>
+                                <f:facet name="output"> <h:outputText value="#{item.smoking}"/></f:facet>
+                                <f:facet name="input"> <h:inputText value="#{item.smoking}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Hotel" style="width:100px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{item.hotel}"/></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{item.hotel}" style="width:100%">
+                                        <f:selectItems value="#{hotelController.itemsAvailableSelectOne}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                                              
+                        <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+                         <p:column style="width:60px">
+                            
+                            <p:commandButton icon="ui-icon-close"
+                                             title="Delete this hotel"
+                                             actionListener="#{roomController.destroy}"
+                                             ajax="false" />
+                        </p:column>
+                    </p:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{roomController.prepareCreate}" value="#{bundle.ListRoomCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListRoomIndexLink}"/>
+                
             </h:form>
         </ui:define>
     </ui:composition>

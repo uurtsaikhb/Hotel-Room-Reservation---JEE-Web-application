@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListRoomBookingTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            <h:form id="form" styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
@@ -19,58 +20,74 @@
                     <h:outputText value="#{roomBookingController.pagination.pageFirstItem + 1}..#{roomBookingController.pagination.pageLastItem + 1}/#{roomBookingController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{roomBookingController.previous}" value="#{bundle.Previous} #{roomBookingController.pagination.pageSize}" rendered="#{roomBookingController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{roomBookingController.next}" value="#{bundle.Next} #{roomBookingController.pagination.pageSize}" rendered="#{roomBookingController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{roomBookingController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomBookingTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomBookingTitle_dateFrom}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dateFrom}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomBookingTitle_dateTo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dateTo}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomBookingTitle_room}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.room}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRoomBookingTitle_no_of_people}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.no_of_people}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{roomBookingController.prepareView}" value="#{bundle.ListRoomBookingViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{roomBookingController.prepareEdit}" value="#{bundle.ListRoomBookingEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{roomBookingController.destroy}" value="#{bundle.ListRoomBookingDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
+                    <p:growl id="msgs" showDetail="true"/>
+                    <p:dataTable value="#{roomBookingController.items}" var="item" editable="true" style="margin-bottom:20px">
+                        <f:facet name="header">
+                            Booking
+                        </f:facet>
+                       <p:ajax event="rowEdit" listener="#{roomBookingController.onRowEdit}" update=":form:msgs" />
+                        <p:ajax event="rowEditCancel" listener="#{roomBookingController.onRowCancel}" update=":form:msgs" />
+ 
+                       <p:column headerText="ID">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.id}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.id}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="From">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{item.dateFrom}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </f:facet>
+                                <f:facet name="input"><p:calendar id="dateFrom" value="#{item.dateFrom}" 
+                                                                  title="#{bundle.CreateRoomBookingTitle_dateFrom}" pattern="MM/dd/yyyy" >
+                                        <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT-6"/>
+                                    </p:calendar>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="To">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{item.dateTo}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </f:facet>
+                                <f:facet name="input"><p:calendar id="dateTo" value="#{item.dateTo}" 
+                                                                  title="#{bundle.CreateRoomBookingTitle_dateFrom}" pattern="MM/dd/yyyy" >
+                                        <f:convertDateTime pattern="MM/dd/yyyy" timeZone="GMT-6"/>
+                                    </p:calendar>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                       <p:column headerText="Room">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.room}"/></f:facet>
+                           <f:facet name="input">  <h:selectOneMenu value="#{item.room}" style="width:100%">
+                                        <f:selectItems value="#{item.room.hotel.rooms}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                               </h:selectOneMenu>
+                           </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Total">
+                            <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{item.no_of_people}"/></f:facet>
+                            <f:facet name="input"><h:inputText value="#{item.no_of_people}"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                         <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+                         <p:column style="width:60px">
+                            
+                            <p:commandButton icon="ui-icon-close"
+                                             title="Delete this hotel"
+                                             actionListener="#{roomBookingController.destroy}"
+                                             ajax="false" />
+                        </p:column>
+                   </p:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{roomBookingController.prepareCreate}" value="#{bundle.ListRoomBookingCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListRoomBookingIndexLink}"/>
+               
             </h:form>
         </ui:define>
     </ui:composition>

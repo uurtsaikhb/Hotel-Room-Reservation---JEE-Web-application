@@ -130,7 +130,7 @@ public class RoomBooking implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.RoomBooking[ id=" + id + " ]";
+        return  confirmation + " "+id + " ]";
     }
     
 }

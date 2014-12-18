@@ -27,6 +27,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import org.primefaces.event.RowEditEvent;
 import ws.BankWS;
 
 @Named("roomBookingController")
@@ -407,5 +408,18 @@ public class RoomBookingController implements Serializable {
         }
 
     }
+    
+     public void onRowEdit(RowEditEvent event) {
+       current=(RoomBooking) event.getObject();
+        FacesMessage msg = new FacesMessage("Booking Edited", ((RoomBooking) event.getObject()).getId()+"");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        update();
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((RoomBooking) event.getObject()).getId()+"");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
 
 }

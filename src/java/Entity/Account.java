@@ -151,7 +151,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Account[ id=" + id + " ]";
+        return id + "";
     }
     
 }

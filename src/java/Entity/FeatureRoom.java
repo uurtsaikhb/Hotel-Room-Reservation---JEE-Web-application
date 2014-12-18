@@ -84,7 +84,7 @@ public class FeatureRoom implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.RoomFeature[ id=" + id + " ]";
+        return id + "";
     }
     
 }

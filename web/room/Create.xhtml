@@ -33,6 +33,30 @@
                             multiple="true" update="messages" sizeLimit="1000000" fileLimit="10" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                     <p:growl id="messages" showDetail="true" />
                 </h:panelGrid>
+                <br/>
+                <p:dataTable value="#{featureRoomController.items}" var="feature" tableStyle="width:auto"
+                             selection="#{roomController.features}"  rowKey='#{feature}'>
+                   <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_feature_type}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.feature_type}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_discription}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.discription}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.id}"/>
+                        </p:column>
+                    
+                    <p:column selectionMode="multiple" style="width:2%" />
+                </p:dataTable>
                 <br />
                 <h:commandLink action="#{roomController.create}" value="#{bundle.CreateRoomSaveLink}" />
                 <br />

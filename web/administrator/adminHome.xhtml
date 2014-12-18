@@ -16,6 +16,8 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateHotelLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{hotelController.selected.id}" title="#{bundle.CreateHotelTitle_id}" />
                     <h:outputLabel value="#{bundle.CreateHotelLabel_name}" for="name" />
                     <h:inputText id="name" value="#{hotelController.selected.name}" title="#{bundle.CreateHotelTitle_name}" />
                     <h:outputLabel value="Street" for="street" />
@@ -32,22 +34,11 @@
                     <p:fileUpload fileUploadListener="#{hotelController.upload}" mode="advanced" dragDropSupport="true"
                             multiple="true" update="messages" sizeLimit="1000000" fileLimit="10" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                     <p:growl id="messages" showDetail="true" />
-                    
-                
                 </h:panelGrid>
                 <br/>
                 <p:dataTable value="#{featureHotelController.items}" var="feature" tableStyle="width:auto"
                              selection="#{hotelController.features}"  rowKey='#{feature}'>
-                   
-                       
-                    <p:column selectionMode="multiple" style="width:2%" />
-                    <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFeatureHotelTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{feature.id}"/>
-                        </p:column>
-                    <p:column>
+                   <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListFeatureHotelTitle_feature_type}"/>
                             </f:facet>
@@ -59,13 +50,19 @@
                             </f:facet>
                             <h:outputText value="#{feature.discription}"/>
                         </p:column>
-                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFeatureHotelTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{feature.id}"/>
+                        </p:column>
+                    
+                    <p:column selectionMode="multiple" style="width:2%" />
                 </p:dataTable>
 <!--                <h:selectManyCheckbox id="grid" value="#{hotelController.features}" layout="grid" >
                     <f:selectItems value="#{featureHotelController.itemsAvailableSelectMany}" var="feature" itemLabel="#{feature}" itemValue="#{feature.description}" />
 
                 </h:selectManyCheckbox>-->
-                <br />
                 <h:commandLink action="#{hotelController.create}" value="#{bundle.CreateHotelSaveLink}" />
                 <br />
                 <br />

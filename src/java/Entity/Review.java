@@ -106,7 +106,7 @@ public class Review implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Review[ id=" + id + " ]";
+        return id + "";
     }
     
 }
