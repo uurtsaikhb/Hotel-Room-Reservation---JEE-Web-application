@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>List of Hotels</title>
+        <title>Hotel</title>
 
     </h:head>
     <h:body>
@@ -53,12 +53,6 @@
                                 #{roomBookingController.hotel.reviews.size()} verified customer reviews
                             </p>
 
-
-                            <div class="hotel_info_book_button">
-                                <p:commandButton id="myButton" 
-                                                 action="#{roomBookingController.findHotelById(item.id)}" 
-                                                 value="Select"/>
-                            </div>
                         </td>
                     </tr>
                 </table>
@@ -115,6 +109,19 @@
                             </tr>
                         </ui:repeat>
                     </table>
+                    <div style="background-color: white; border-collapse: collapse;" class="room_list">
+                        <ui:repeat  value="#{roomBookingController.hotel.hotelFeatures}" var="feature">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="#{feature.feature_type}"/>
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <p:outputLabel value="#{feature.discription}"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </ui:repeat>
+                    </div>
+                        
                 </h:form>
 
             </ui:define>
