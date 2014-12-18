@@ -14,7 +14,7 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form id="form">
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateHotelLabel_name}" for="name" />
                     <h:inputText id="name" value="#{hotelController.selected.name}" title="#{bundle.CreateHotelTitle_name}" />
@@ -61,8 +61,8 @@
 
                     function handlePointClick(event) {
                     if (currentMarker === null) {
-                    document.getElementById('j_idt43:lat').value = event.latLng.lat();
-                    document.getElementById('j_idt43:lng').value = event.latLng.lng();
+                    document.getElementById('form:lat').value = event.latLng.lat();
+                    document.getElementById('form:lng').value = event.latLng.lng();
 
                     currentMarker = new google.maps.Marker({
                     position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
