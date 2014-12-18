@@ -20,7 +20,7 @@ import javax.xml.ws.WebServiceRef;
 @Named(value = "bankWS")
 @RequestScoped
 public class BankWS {
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/BankWebservice/BankWebService.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/webservice/BankWebService.wsdl")
     private BankWebService_Service service;
   
     @Inject RoomBookingController roomBooking;
@@ -99,5 +99,5 @@ public class BankWS {
         return port.checkCard(cardType, cardNumber, securityCode, expdateMonth, expdateYear);
     }
 
-
+   
 }

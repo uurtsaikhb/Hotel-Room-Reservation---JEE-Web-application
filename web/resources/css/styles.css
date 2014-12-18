@@ -78,10 +78,18 @@ ul
     margin-bottom: 10px;
     background: rgba(0,0,0,.2)
 }
+.admincontent{
+    
+    width: 80%;
+    padding: 5px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    clear: both;
 
+}
 .content
 {
-    //width: 70%;
+    width: 800px;
     padding: 5px;
     margin: 0 auto;
     margin-bottom: 50px;
